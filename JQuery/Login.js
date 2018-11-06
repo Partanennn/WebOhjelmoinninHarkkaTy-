@@ -26,7 +26,7 @@ $(() => {
                         // Ajaa saman asian kuin php:n $_SESSION, häviää kun ikkuna suljetaan
                         sessionStorage['logged'] == true;
                         sessionStorage['username'] == data[0].username;
-                        //window.location.href = "";
+                        window.location.href = 'etusivu.html';
                     } else {
                         alert("Tunnus tai salasana väärin");
                     }
