@@ -43,16 +43,31 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="form-row">
+        <div class="row">
+            <div class="col-sm-8">
             <form id="login_form" action="/MUUTA TÄÄ" class="form">
                 <label for="name" class="mr-sm-2">Tunnus:</label>
                 <input id="user_text" type="name" class="form-control mb-2 mr-sm-2">
                 <label for="password" class="mr-sm-2">Salasana:</label>
                 <input id="password_text" type="password" class="form-control mb-2 mr-sm-2">
+                <button id="login_button" class="btn btn-primary">Kirjaudu</button>
             </form>
         </div>
-        <button id="login_button" class="btn btn-primary">Kirjaudu</button>
     </div>
+
+                <div class="col-sm-8">
+                <form id="registration_form" action="/MUUTA TÄÄ" class="form">
+                    <label for="name" class="mr-sm-2">Nimi:</label>
+                    <input id="user_name" type="name" class="form-control mb-2 mr-sm-2">
+                    <label for="password" class="mr-sm-2">Salasana:</label>
+                    <input id="reg_pwd" type="password" class="form-control mb-2 mr-sm-2">
+                </form>
+            </div>
+            <button id="login_button" class="btn btn-primary">Rekisteröidy</button>
+
+    </div>
+
+
 
 </body>
 </html>
