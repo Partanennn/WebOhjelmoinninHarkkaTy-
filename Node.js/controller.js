@@ -37,5 +37,23 @@ module.exports =
                 }
             }
         );
+
+    },
+    
+    createUser: (req, res) => {
+        console.log("Body: " + JSON.stringify(req.body));
+        let v = req.body;
+
+        CONNECTION.query('INSERT INTO users (username, pass, name, streetAddress, city) VALUES (?, ?, ?, ?, ?)', [v.username_reg, v.password_reg, v.name_reg, v.address_reg, v.select_reg],
+            (err, results, fields) => {
+                if(err) {
+                    console.log("Error while tried to add new user to users table, reason: "+err);
+                    res.json(error);
+                } else {
+                    console.log("New user added to table users: "+JSON.stringify(results));
+                    res.statusCode = 201;
+                }
+            }
+        );
     }
 }
