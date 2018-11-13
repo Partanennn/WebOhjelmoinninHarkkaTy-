@@ -13,8 +13,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-    <script src="JQuery/Kirjautunut.js"></script>
-
+    <!--Sisäänkirjautumis scripti-->
+    <script src="JQuery/Login.js"></script>
     <style>
         .navbar-collapse {
             justify-content: flex-end;
@@ -41,6 +41,18 @@
             </ul>
         </div>
     </nav>
+
+    <div class="container-fluid">
+        <div class="form-row">
+            <form id="login_form" action="/MUUTA TÄÄ" class="form">
+                <label for="name" class="mr-sm-2">Tunnus:</label>
+                <input id="user_text" type="name" class="form-control mb-2 mr-sm-2">
+                <label for="password" class="mr-sm-2">Salasana:</label>
+                <input id="password_text" type="password" class="form-control mb-2 mr-sm-2">
+            </form>
+        </div>
+        <button id="login_button" class="btn btn-primary">Kirjaudu</button>
+    </div>
 
 </body>
 </html>

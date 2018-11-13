@@ -1,5 +1,5 @@
 $( () => {
     if(sessionStorage['logged'] != "true") {
-        window.location.href='Rekisteroidy.html';
+        window.location.href='rekisteroidy.html';
     }
 });
