@@ -10,23 +10,25 @@ $(() => {
         var pass = $("#reg_pwd").val();
         var address = $("#user_address").val();
         var email = $("#user_email").val();
+        var city = $("#user_city").val();
+
         // Variables to check if textbox is not empty
-        var nameOK, usernameOK, passOK, emailOK, addressOK;
+        var nameOK, usernameOK, passOK, emailOK, addressOK, cityOK;
 
         // These if elses are handling textboxes and their borders
-        if(name == "") {
+        if(username == "") {
             $('input[id="account_name"]').css("border", "2px solid red");
-            nameOK = false;
+            usernameOK = false;
         } else {
-            nameOK = true;
+            usernameOK = true;
             $('input[id="account_name"]').css("border", "none");
         }
 
-        if(username == "") {
+        if(name == "") {
             $('input[id="user_name"]').css("border", "2px solid red");
-            usernameOK = false;
+            nameOK = false;
         } else {
-            usernameOK = true
+            nameOK = true
             $('input[id="user_name"]').css("border", "none");
         } 
         
@@ -54,7 +56,15 @@ $(() => {
             $('input[id="user_address"]').css("border", "none");
         }
 
-        if(nameOK == true && usernameOK == true && passOK == true && emailOK == true) {
+        if(city == "") {
+            $('input[id="user_city"]').css("border", "2px solid red");
+            cityOK = false;
+        } else {
+            cityOK = true;
+            $('input[id="user_city"]').css("border", "none");
+        }
+
+        if(nameOK == true && usernameOK == true && passOK == true && emailOK == true && cityOK == true) {
             $('input[id="visitingaddress_reg"], input[id="reg_pwd"], input[id="user_name"], input[id="account_name"]').css("border", "none");
             
             // This $.get tries to find username what user did put in textbox, 
@@ -65,6 +75,7 @@ $(() => {
                 if(data[0] == undefined) {
                     createUser();
                     alert("Rekisteröinti onnistui!");
+                    window.location.href='rekisteroidy.html';
                 } else {
                     alert("Tunnus on jo varattu, kokeile uudestaan");
                 }
@@ -76,7 +87,7 @@ $(() => {
     });
 
     function createUser() {
-        var addons = $("#register_form").serialize();
+        var addons = $("#registration_form").serialize();
 
         $.post(
             "http://localhost:3001/create_user", 
