@@ -44,26 +44,37 @@
 
     <div class="container-fluid pt-5">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-2">
             <form id="login_form" action="/MUUTA TÄÄ" class="form">
+                <h1>Kirjaudu</h1>
                 <label for="name" class="mr-sm-2">Tunnus:</label>
                 <input id="user_text" type="name" class="form-control mb-2 mr-sm-2">
                 <label for="password" class="mr-sm-2">Salasana:</label>
                 <input id="password_text" type="password" class="form-control mb-2 mr-sm-2">
                 <button id="login_button" class="btn btn-primary">Kirjaudu</button>
             </form>
-        </div>
-        </div>
-                <div class="col-sm-8">
+            </div>
+        
+                <div class="col-sm-2">
                 <form id="registration_form" action="/MUUTA TÄÄ" class="form">
+                    <h1>Rekisteröidy</h1>
+                    <label for="account_name" class="mr-sm-2">Tunnus:</label>
+                    <input id="account_name" type="name" class="form-control mb-2 mr-sm-2">
                     <label for="name" class="mr-sm-2">Nimi:</label>
                     <input id="user_name" type="name" class="form-control mb-2 mr-sm-2">
                     <label for="password" class="mr-sm-2">Salasana:</label>
                     <input id="reg_pwd" type="password" class="form-control mb-2 mr-sm-2">
+                    <label for="address" class="mr-sm-2">Osoite:</label>
+                    <input id="user_address" type="address" class="form-control mb-2 mr-sm-2">
+                    <label for="user_city" class="mr-sm-2">Kaupunki:</label>
+                    <input id="user_city" type="city" class="form-control mb-2 mr-sm-2">
+                    <label for="user_email" class="mr-sm-2">Sähköposti:</label>
+                    <input id="user_email" type="email" class="form-control mb-2 mr-sm-2">
+                    <button id="reg_button" class="btn btn-primary">Rekisteröidy</button>
                 </form>
             </div>
-            <button id="login_button" class="btn btn-primary">Rekisteröidy</button>
-
+            
+        </div>
     </div>
 
 
