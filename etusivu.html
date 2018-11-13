@@ -4,7 +4,7 @@
     <title>Harkkatyö</title>
     <link rel="stylesheet" href="etusivu_style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <!--JQuery scripts-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -12,6 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <script src="JQuery/Logout.js"></script>
+    <script src="JQuery/Logged.js"></script>
 
     <style>
         .navbar-collapse {
@@ -34,11 +37,13 @@
                     <a class="nav-link" href="">Lainat ja varaukset</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Kirjaudu ulos</a> 
+                    <a id="logout" class="nav-link" href="javascript:undefined">Kirjaudu ulos</a> 
                 </li>
             </ul>
         </div>
     </nav>
-
+    <div id="logout_dialog">
+        <p>Haluatko varmasti kirjautua ulos?</p>
+    </div>
 </body>
 </html>
