@@ -22,13 +22,13 @@ $(() => {
             $.get("http://localhost:3001/users/"+username)
                 // Tapahtuu jos onnistuu yhdistämään databaseen, muuten hyppää suoraan fail-funktioon
                 .done( (data, status, jqXHR) => {
-                    if(data[0].pass == password) {
-                        // Ajaa saman asian kuin php:n $_SESSION, häviää kun ikkuna suljetaan
-                        sessionStorage['logged'] == true;
-                        sessionStorage['username'] == data[0].username;
+                    if(data[0] == undefined || data[0].pass != password) {
+                        alert("Väärä tunnus tai salasana!!");
+                    } else if(data[0].pass == password){
+                        sessionStorage['logged'] = true;        
+                        sessionStorage['login_name'] = data[0].name;
+                        sessionStorage['login_username'] = data[0].username;
                         window.location.href = 'etusivu.html';
-                    } else {
-                        alert("Tunnus tai salasana väärin");
                     }
                 })
                 .fail( (err) => {
