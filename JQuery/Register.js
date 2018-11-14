@@ -3,19 +3,20 @@ $(() => {
     if(sessionStorage['logged'] == "true") {
         window.location.href="etusivu.html";
     }
-
+    
     $("#reg_button").click(() => {
+        
         var name = $("#user_name").val();
         var username = $("#account_name").val();
         var pass = $("#reg_pwd").val();
         var address = $("#user_address").val();
         var email = $("#user_email").val();
         var city = $("#user_city").val();
-
+        var pass2 = $("#reg_pwd2").val();
         // Variables to check if textbox is not empty
-        var nameOK, usernameOK, passOK, emailOK, addressOK, cityOK;
+        var nameOK, usernameOK, passOK, pass2OK, emailOK, addressOK, cityOK;
 
-        // These if elses are handling textboxes and their borders
+        // Nämä if-elset kontrolloivat inputteja ja niiden borderreita
         if(username == "") {
             $('input[id="account_name"]').css("border", "2px solid red");
             usernameOK = false;
@@ -38,6 +39,21 @@ $(() => {
         } else {
             passOK = true;
             $('input[id="reg_pwd"]').css("border", "none");
+        }
+        
+        if(pass2 == "") {
+            $('input[id="reg_pwd2"]').css("border", "2px solid red");
+            pass2OK = false;
+        } else {
+            pass2OK = true;
+            $('input[id="reg_pwd2"]').css("border", "none");
+        }
+
+        // Tämä tarkistaa ovatko salasanat samat
+        if(passOK && pass2OK && pass == pass2) {
+            passOK = true;
+        } else {
+            passOK = false;
         }
 
         if(email == "") {
@@ -64,14 +80,13 @@ $(() => {
             $('input[id="user_city"]').css("border", "none");
         }
 
-        if(nameOK == true && usernameOK == true && passOK == true && emailOK == true && cityOK == true) {
-            $('input[id="visitingaddress_reg"], input[id="reg_pwd"], input[id="user_name"], input[id="account_name"]').css("border", "none");
+        if(nameOK && usernameOK && passOK && emailOK && addressOK && cityOK) {
+            $('input[id="user_name"], input[id="account_name"], input[id="reg_pwd"], input[id="reg_pwd2"], input[id="user_address"], input [id="user_city"], input[id="user_email"]').css("border", "none");
             
-            // This $.get tries to find username what user did put in textbox, 
-            //if response is undefined(=username doesn't exists) then create new user
             $.get("http://localhost:3001/users/"+username
             ).done((data, status, jq) => {
-                // Checks if response is empty, if yes then creates new user
+                // Tarkistaa palauttaako serveri mitään objektia, jos ei niin silloin tietokannassa
+                // ei ole annetulla tunnuksella olevaa käyttäjää
                 if(data[0] == undefined) {
                     createUser();
                     alert("Rekisteröinti onnistui!");
@@ -81,16 +96,16 @@ $(() => {
                 }
             });
 
-        } else if(passOK){
+        } else {
             alert("Ole hyvä ja täytä kaikki kentät!");
         }
     });
 
     function createUser() {
         var addons = $("#registration_form").serialize();
-
+        alert(addons);
         $.post(
-            "http://localhost:3001/create_user", 
+            "http://localhost:3001/users", 
             addons
         ).done ( (data, status, jqxhr) => {
 

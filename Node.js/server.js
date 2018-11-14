@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var controller = require('./controller');
 var app = express();
 var port = 3001;
@@ -14,15 +15,19 @@ var allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-// REST API
-app.route("/users/all")
-    .get(controller.fetchAll);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+// REST API
+app.route("/users")
+    .get(controller.fetchAll)
+    // Tekee uuden käyttäjän
+    .post(controller.createUser);
+    
 app.route("/users/:tunnus") 
     .get(controller.fetchOneUser);
 
 
-
 app.listen(port, () => {
-    console.log("Serveri kuuntelee porttia "+port);
+    console.log("Server is listening port "+port);
 });

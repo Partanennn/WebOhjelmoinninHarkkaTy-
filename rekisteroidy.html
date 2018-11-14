@@ -15,6 +15,7 @@
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
     <!--Sisäänkirjautumis scripti-->
+    <script src="JQuery/Register.js"></script>
     <script src="JQuery/Login.js"></script>
     <script src="JQuery/Reg_form_popup.js"></script>
     <style>
@@ -58,22 +59,22 @@
             <br><br><a id="createAccountLink" href="javascript:undefined">Luo tunnus</a>
             </div>
             <div id="reg_div" class="col">
+                <h1>Rekisteröidy</h1>
                     <form id="registration_form" action="/MUUTA TÄÄ" class="form">
-                        <h1>Rekisteröidy</h1>
                         <label for="account_name" class="mr-sm-2">Tunnus:</label>
-                        <input id="account_name" type="name" class="form-control mb-2 mr-sm-2">
-                        <label for="name" class="mr-sm-2">Nimi:</label>
-                        <input id="user_name" type="name" class="form-control mb-2 mr-sm-2">
-                        <label for="password" class="mr-sm-2">Salasana:</label>
-                        <input id="reg_pwd" type="password" class="form-control mb-2 mr-sm-2">
-                        <label for="password2" class="mr-sm-2">Salasana uudestaan:</label>
-                        <input id="reg_pwd2" type="password" class="form-control mb-2 mr-sm-2">
-                        <label for="address" class="mr-sm-2">Osoite:</label>
-                        <input id="user_address" type="address" class="form-control mb-2 mr-sm-2">
+                        <input name="account_name" id="account_name" type="name" class="form-control mb-2 mr-sm-2">
+                        <label for="user_name" class="mr-sm-2">Nimi:</label>
+                        <input name="user_name" id="user_name" type="name" class="form-control mb-2 mr-sm-2">
+                        <label for="reg_pwd" class="mr-sm-2">Salasana:</label>
+                        <input name="reg_pwd" id="reg_pwd" type="password" class="form-control mb-2 mr-sm-2">
+                        <label for="reg_pwd2" class="mr-sm-2">Salasana uudestaan:</label>
+                        <input name="reg_pwd2" id="reg_pwd2" type="password" class="form-control mb-2 mr-sm-2">
+                        <label for="user_address" class="mr-sm-2">Osoite:</label>
+                        <input name="user_address" id="user_address" type="address" class="form-control mb-2 mr-sm-2">
                         <label for="user_city" class="mr-sm-2">Kaupunki:</label>
-                        <input id="user_city" type="city" class="form-control mb-2 mr-sm-2">
+                        <input name="user_city" id="user_city" type="city" class="form-control mb-2 mr-sm-2">
                         <label for="user_email" class="mr-sm-2">Sähköposti:</label>
-                        <input id="user_email" type="email" class="form-control mb-2 mr-sm-2">
+                        <input name="user_email" id="user_email" type="email" class="form-control mb-2 mr-sm-2">
                         
                     </form>
                     <button id="reg_button" class="btn btn-primary">Rekisteröidy</button>
