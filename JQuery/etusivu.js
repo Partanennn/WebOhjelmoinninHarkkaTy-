@@ -12,15 +12,24 @@ $(() => {
     });
 
     $("#save_changed_data").click(() => {
-        $.ajax({
-            url: "http://localhost:3001/users/" + sessionStorage['login_username'],
-            method: 'put',
-            data: $("#change_data").serialize()
-        }
-        ).done( (data, status, jqXHR) => {
+        if($("#user_name").val() == "") {
+            alert("Nimi kenttä ei saa olla tyhjä!!");
+            $("#user_name").css("border", "2px solid red");
+        } else {
+            $("#user_name").css("border", "");
             
-            window.location.href = "etusivu.html";
-        }).fail();
+            $.ajax({
+                url: "http://localhost:3001/users/" + sessionStorage['login_username'],
+                method: 'put',
+                data: $("#change_data").serialize()
+            }
+            ).done( (data, status, jqXHR) => {
+                if(jqXHR.status == 204) {
+                    alert("Tiedot päivitetty onnistuneesti!");    
+                    window.location.href = "etusivu.html";
+                } else alert("Jotain meni pieleen :(");
+            }).fail();
+        }
     })
 
     $("#muuta_link").click( () => {
