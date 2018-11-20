@@ -27,3 +27,9 @@ CREATE TABLE kanta.machines
     category varChar(20) NOT NULL
 )
 ENGINE = InnoDB;
+
+CREATE DATABASE kanta.lainat
+(
+    name varChar()
+)
+ENGINE = InnoDB;
