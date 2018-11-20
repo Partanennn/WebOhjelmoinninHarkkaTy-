@@ -61,7 +61,7 @@ module.exports =
         let c = req.body; // Form fields
         let key = req.params.tunnus; // Username
   
-        CONNECTION.query('UPDATE users SET name=?, WHERE username=?', [c.username, key],
+        CONN.query('UPDATE users SET name=?, streetAddress=?, city=?, email=? WHERE username=?', [c.user_name, c.user_address, c.user_city, c.user_email, key],
           function(error, results, fields){
             if ( error ){
                 console.log("Error while trying to update "+key+" in users table, reason: " + error);

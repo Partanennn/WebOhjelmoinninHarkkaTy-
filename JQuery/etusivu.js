@@ -3,12 +3,6 @@ $(() => {
         autoOpen: false,
         buttons: [
             {
-                text: "Tallenna",
-                click: () => {
-
-                }
-            },
-            {
                 text: "Peruuta",
                 click: function() {
                     $(this).dialog("close");
@@ -16,6 +10,18 @@ $(() => {
             }
         ]
     });
+
+    $("#save_changed_data").click(() => {
+        $.ajax({
+            url: "http://localhost:3001/users/" + sessionStorage['login_username'],
+            method: 'put',
+            data: $("#change_data").serialize()
+        }
+        ).done( (data, status, jqXHR) => {
+            
+            window.location.href = "etusivu.html";
+        }).fail();
+    })
 
     $("#muuta_link").click( () => {
         $("#change_data_div").dialog("open");

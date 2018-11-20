@@ -25,7 +25,7 @@ app.route("/users")
     
 app.route("/users/:tunnus") 
     .get(controller.fetchOneUser)
-    .put();
+    .put(controller.updateUser);
 
 app.route("/lainat")
     .post();
