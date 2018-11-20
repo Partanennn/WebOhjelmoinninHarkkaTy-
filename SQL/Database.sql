@@ -30,6 +30,6 @@ ENGINE = InnoDB;
 
 CREATE DATABASE kanta.lainat
 (
-    name varChar()
+    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
 )
 ENGINE = InnoDB;
