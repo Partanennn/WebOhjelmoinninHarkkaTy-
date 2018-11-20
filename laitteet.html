@@ -16,6 +16,7 @@
     <script src="JQuery/etusivu.js"></script>
     <script src="JQuery/Logout.js"></script>
     <script src="JQuery/Logged.js"></script>
+    <script src="JQuery/laitehaku.js"></script>
 
     <style>
         .navbar-collapse {
@@ -32,7 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar mr-4">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Lainaa<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="etusivu.html">Etusivu<span class="sr-only">(current)</span></a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="laitteet.html">Laitteet<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Lainat ja varaukset</a>
@@ -54,6 +58,8 @@
                 <input type="text" id="name_search" name="name" class="form-control mb-2 mr-sm-2">
                 <label for="model_search">Malli:</label>
                 <input type="text" id="model_search" name="model" class="form-control mb-2 mr-sm-2">
+                <label for="brand_search">Merkki:</label>
+                <input type="text" id="brand_search" name="brand" class="form-control mb-2 mr-sm-2">
                 <label for="desc_search">Kuvaus:</label>
                 <input type="text" id="desc_search" name="description" class="form-control mb-2 mr-sm-2">
                 <label for="location_search">Sijainti:</label>
