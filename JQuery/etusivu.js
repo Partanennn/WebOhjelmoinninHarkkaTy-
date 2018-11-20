@@ -36,7 +36,7 @@ $(() => {
         $("#change_data_div").dialog("open");
     });
 
-
+    // Hakee tieot muuta tietoja-dialogiin
     $.get("http://localhost:3001/users/" + 
         sessionStorage['login_username']
     ).done( (data, status, jqXHR) => {
