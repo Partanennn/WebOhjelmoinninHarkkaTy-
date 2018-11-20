@@ -21,11 +21,13 @@ app.use(bodyParser.json());
 // REST API
 app.route("/users")
     .get(controller.fetchAll)
-    // Tekee uuden käyttäjän
     .post(controller.createUser);
     
 app.route("/users/:tunnus") 
     .get(controller.fetchOneUser);
+
+app.route("/lainat")
+    .post();
 
 
 app.listen(port, () => {
