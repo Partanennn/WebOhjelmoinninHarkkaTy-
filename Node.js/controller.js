@@ -69,7 +69,7 @@ module.exports =
             }
             else
             {
-                console.log("Data updated for user "+key+", ";
+                console.log("Data updated for user "+key);
                 res.statusCode = 204;
                 res.send();
             }
