@@ -5,12 +5,12 @@ $(() => {
             {
                 text: "Tallenna",
                 click: () => {
-                    
+
                 }
             },
             {
                 text: "Peruuta",
-                click: () => {
+                click: function() {
                     $(this).dialog("close");
                 }
             }
