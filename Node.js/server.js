@@ -24,7 +24,8 @@ app.route("/users")
     .post(controller.createUser);
     
 app.route("/users/:tunnus") 
-    .get(controller.fetchOneUser);
+    .get(controller.fetchOneUser)
+    .put();
 
 app.route("/lainat")
     .post();

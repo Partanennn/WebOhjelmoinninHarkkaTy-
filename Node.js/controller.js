@@ -55,5 +55,25 @@ module.exports =
                 }
             }
         );
+    },
+
+    updateUser: (req, res) => {
+        let c = req.body; // Form fields
+        let key = req.params.tunnus; // Username
+  
+        CONNECTION.query('UPDATE users SET name=?, WHERE username=?', [c.username, key],
+          function(error, results, fields){
+            if ( error ){
+                console.log("Error while trying to update "+key+" in users table, reason: " + error);
+                res.send(error);
+            }
+            else
+            {
+                console.log("Data updated for user "+key+", ";
+                res.statusCode = 204;
+                res.send();
+            }
+          }
+        );
     }
 }
