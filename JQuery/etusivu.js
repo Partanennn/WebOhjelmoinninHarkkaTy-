@@ -11,6 +11,7 @@ $(() => {
         ]
     });
 
+    // Ylemmän tallenna-napin painallus
     $("#save_changed_data").click(() => {
         if($("#user_name").val() == "") {
             alert("Nimi kenttä ei saa olla tyhjä!!");
@@ -32,6 +33,7 @@ $(() => {
         }
     })
 
+    // Aukaisee dialogin
     $("#muuta_link").click( () => {
         $("#change_data_div").dialog("open");
     });
