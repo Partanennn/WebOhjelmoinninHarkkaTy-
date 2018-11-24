@@ -29,10 +29,10 @@ module.exports =
         CONN.query('SELECT * FROM users WHERE username=?', [username],
             (error, result, fields) => {
                 if(error) {
-                    console.log("Virhe haettaessa yhden käyttäjän tieto tietoja tietokannasta users-taulusta, syy: "+error.sqlMessage);
+                    console.log("Error while trying to fetch data for user, reason: "+error.sqlMessage);
                     res.status(500).json({'status': 'not ok', 'status_text': error.sqlMessage});
                 } else {
-                    console.log("Yhden käyttäjän tiedot haettu onnistuneesti users-taulusta");
+                    console.log("Data for "+ username +" fetched succesfully from table");
                     res.status(200).json(result);
                 }
             }
@@ -40,6 +40,22 @@ module.exports =
 
     },
     
+    machinesSearch: (req, res) => {
+        let v = req.body;
+        console.log("Name::: "+JSON.stringify(req.body));
+        CONN.query("SELECT * FROM machines WHERE name LIKE '%"+ v.name +"%' AND model LIKE '%"+ v.model +"%' AND brand LIKE '%"+ v.brand +"%' AND description_text LIKE '%"+ v.description +"%' AND location LIKE '%"+ v.location +"%' AND owner LIKE '%"+ v.owner +"%' AND category LIKE '%"+ v.category +"%'", 
+            (error, result, fields) => {
+                if(error) {
+                    console.log("Error while fetching machines from machines table, reason: "+error.sqlMessage);
+                    res.status(500).json({'status': 'not ok', 'status_text': error.sqlMessage});
+                } else {
+                    console.log("Succesfully fetched all machines from machines table");
+                    res.status(200).json(result);
+                }
+            }
+        );
+    },
+ 
     createUser: (req, res) => {
         console.log("Body: " + JSON.stringify(req.body));
         let v = req.body;

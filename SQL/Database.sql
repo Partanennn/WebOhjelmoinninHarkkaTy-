@@ -23,12 +23,12 @@ CREATE TABLE kanta.machines
     brand varChar(40) NOT NULL,
     description_text varChar(200) DEFAULT "Tyhja",
     location varChar(80) NOT NULL,
-    owner int NOT NULL,
+    owner varChar(40) NOT NULL,
     category varChar(20) NOT NULL
 )
 ENGINE = InnoDB;
 
-CREATE DATABASE kanta.lainat
+CREATE TABLE kanta.lainat
 (
     laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
 )

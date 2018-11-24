@@ -27,6 +27,10 @@ app.route("/users/:tunnus")
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
 
+app.route("/machines")
+    .get(controller.machinesSearch)
+    .post(controller.machinesSearch);
+
 app.route("/lainat")
     .post();
 
