@@ -1,4 +1,7 @@
 $(() => {
+    if ( sessionStorage["login_role"] == "admin") {
+        $("#machineTnappidiv").append("<button type='submit' class='lisaysnappi' >Lisää laite</button>");
+    }
     $("#search_button").click(() => {
         var hakuehdot = $("#searchForm").serialize();
         $.post("http://localhost:3001/machines",
@@ -97,7 +100,7 @@ $(() => {
                     ).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
                             alert("Tiedot päivitetty onnistuneesti!");    
-                            window.location.href = "etusivu.html";
+                            window.location.href = "laitteet.html";
                         } else alert("Jotain meni pieleen :(");
                     }).fail();
                 }
