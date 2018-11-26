@@ -31,6 +31,9 @@ app.route("/machines")
     .get(controller.machinesSearch)
     .post(controller.machinesSearch);
 
+app.route("/machines/add")
+    .post(controller.createMachine);
+
 app.route("/machines/:id")
     .put(controller.updateMachine)
     .get(controller.fetchOneMachine)

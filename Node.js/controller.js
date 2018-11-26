@@ -106,6 +106,21 @@ module.exports =
         );
     },
 
+    createMachine: (req, res) => {
+        let v = req.body;
+
+        CONN.query('INSET INTO machines (name, model, brand, description_text, location, owner, category) VALUES (?, ?, ?, ?, ?, ?, ?)', [v.add_name, v.add_model, v.add_brand, v.add_desc, v.add_location, v.add_owner, v.add_category],
+            (error, results, fields) => {
+                if(error) {
+                    console.log("Error while trying to add new machine, reason: "+error.mysql);
+                    res.json(error);
+                } else {
+                    console.log("Succesfully added new machine to machines table!:))");
+                    res.statusCode = 201;
+                }
+            });
+    },
+
     updateUser: (req, res) => {
         let c = req.body; // Form fields
         let key = req.params.tunnus; // Username
