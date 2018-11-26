@@ -32,6 +32,7 @@ app.route("/machines")
     .post(controller.machinesSearch);
 
 app.route("/machines/:id")
+    .put(controller.updateMachine)
     .get(controller.fetchOneMachine)
     .delete(controller.deleteMachine);
 

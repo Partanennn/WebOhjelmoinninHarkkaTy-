@@ -59,7 +59,7 @@ module.exports =
 
     fetchOneMachine: (req, res) => {
         let c = req.params.id;
-        
+
         CONN.query('SELECT * FROM machines WHERE serial_number=?', [c], 
             (error, results, fields) => {
                 if(error) {
@@ -68,6 +68,23 @@ module.exports =
                 } else {
                     console.log("Succesfully fetched all machines from machines table");
                     res.status(200).json(results);
+                }
+            })
+    },
+
+    updateMachine: (req, res) => {
+        let c = req.body;
+        let key = req.params.id;
+
+        CONN.query('UPDATE machines SET name=?, model=?, brand=?, description_text=?, location=?, owner=?, category=? WHERER serial_number=?', [c.edit_name, c.edit_model, c.edit_brand, c.edit_desc, c.edit_location, c.edit_owner, c.edit_category, key], 
+            (erro, results, fields) => {
+                if(error) {
+                    console.log("Error while trying to update ("+ key +") machine info, reason: "+error.sqlMessage);
+                    res.send(error);
+                } else {
+                    console.log("Data updated for machines table with "+key+" id");
+                    res.statusCode = 204;
+                    res.send();
                 }
             })
     },
