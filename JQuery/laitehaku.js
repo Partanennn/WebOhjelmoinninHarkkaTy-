@@ -11,6 +11,7 @@ $(() => {
                     nappi = "<input type='submit' class='muokkausnappi' value='Muuta'>" +
                     "<button type='submit' class='poistonappi' data-deleteid="+ laite.serial_number +">Poista</button>"
                 }
+
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.name + "</td>" + 
