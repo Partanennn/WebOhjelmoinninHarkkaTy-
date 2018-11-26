@@ -56,6 +56,21 @@ module.exports =
             }
         );
     },
+
+    fetchOneMachine: (req, res) => {
+        let c = req.params.id;
+        
+        CONN.query('SELECT * FROM machines WHERE serial_number=?', [c], 
+            (error, results, fields) => {
+                if(error) {
+                    console.log("Error while fethching one machine info from machines-table, reason: "+error);
+                    res.json({"status": 500, "error": error, "response": null});                    
+                } else {
+                    console.log("Succesfully fetched all machines from machines table");
+                    res.status(200).json(results);
+                }
+            })
+    },
  
     createUser: (req, res) => {
         console.log("Body: " + JSON.stringify(req.body));
