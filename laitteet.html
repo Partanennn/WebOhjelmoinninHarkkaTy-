@@ -49,10 +49,13 @@
     <div id="logout_dialog">
         <p>Haluatko varmasti kirjautua ulos?</p>
     </div>
+    <div id="deleteMachine_dialog">
+        <p>Haluatko varmasti poistaa laitteen?</p>
+    </div>
     <div class="container-fluid">
         <form id="searchForm">
-            <fieldset>
                 <legend>Hae laitteita</legend>
+            <div class="float-sm-left">
                 <label for="name_search">Nimi:</label>
                 <input type="text" id="name_search" name="name" class="form-control mb-2 mr-sm-2">
                 <label for="model_search">Malli:</label>
@@ -61,6 +64,8 @@
                 <input type="text" id="brand_search" name="brand" class="form-control mb-2 mr-sm-2">
                 <label for="desc_search">Kuvaus:</label>
                 <input type="text" id="desc_search" name="description" class="form-control mb-2 mr-sm-2">
+            </div>
+            <div class="float-sm-right">
                 <label for="location_search">Sijainti:</label>
                 <input type="text" id="location_search" name="location" class="form-control mb-2 mr-sm-2">
                 <label for="owner_search">Omistaja:</label>
@@ -69,10 +74,12 @@
                 <input type="text" id="category_search" name="category" class="form-control mb-2 mr-sm-2">
                 <label for="serial_search">Sarjanumero:</label>
                 <input type="text" id="serial_search" name="serial" class="form-control mb-2 mr-sm-2">
-                <input type="submit" id="search_button" value="Hae">
-                
-            </fieldset>
+                <div id="machineTnappidiv"><input type="submit" id="search_button" value="Hae"></div>
+            </div>
         </form>
+    </div>
+    <div class="container-fluid">
+        <div  id="machineTDiv">
         <table class="table-striped" id="machinesTable">
             <thead>
                 <tr>
@@ -87,9 +94,9 @@
                 </tr>
             </thead>
             <tbody id="machinesTbody">
-
             </tbody>
         </table>
+    </div>
     </div>
 </body>
 </html>
