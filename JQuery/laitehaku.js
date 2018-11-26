@@ -126,15 +126,16 @@ $(() => {
             {
                 text: "Tallenna",
                 click: function() {
-                    var lisays = $("#addMachine_form").serialize()
-                    $.post("http://localhost:3001/machines", lisays)
-                    .done((data, status, jqXHR) => {
-                        alert("Laite lisätty onnistuneesti!");
-                        window.location.href = "laitteet.html";
-                    })
-                    .fail(
-                        alert("Jotain meni pieleen :(")
-                    );
+                    $.ajax({
+                        url: "http://localhost:3001/machines/add",
+                        method: 'post',
+                        data: $("#addMachine_form").serialize()
+                    }).done(function(data, status, jqXHR)  {
+                        if (jqXHR.status == 201) {
+                            alert("Laite lisätty onnistuneesti!");
+                            window.location.href = "laitteet.html";
+                        } else alert("Jotain meni pieleen :(")
+                    }).fail();  
                 }
             },
             {
