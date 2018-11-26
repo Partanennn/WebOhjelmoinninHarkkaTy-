@@ -31,6 +31,9 @@ app.route("/machines")
     .get(controller.machinesSearch)
     .post(controller.machinesSearch);
 
+app.route("/machines/:id")
+    .delete(controller.deleteMachine);
+
 app.route("/lainat")
     .post();
 

@@ -92,5 +92,21 @@ module.exports =
             }
           }
         );
+    },
+
+    deleteMachine: (req, res) => {
+        let key = req.params.id;
+
+        CONN.query('DELETE FROM machines WHERE serial_number=?', [key],
+        (error, results, fields) => {
+            if(error) {
+                console.log("Error while trying to delete data from machines-table, reason: "+error.sqlMessage);
+                res.send(error);
+            } else {
+                console.log("Data deleted from machines table");
+                res.statusCode = 204;
+                res.send();
+            }
+        });
     }
 }

@@ -6,6 +6,7 @@ $(() => {
         ).done( (data, status, jqXHR) => {
             $("#machinesTbody").empty();
             data.forEach( (laite) => {
+                
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.name + "</td>" + 
