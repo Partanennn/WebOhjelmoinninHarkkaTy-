@@ -76,8 +76,8 @@ module.exports =
         let c = req.body;
         let key = req.params.id;
 
-        CONN.query('UPDATE machines SET name=?, model=?, brand=?, description_text=?, location=?, owner=?, category=? WHERER serial_number=?', [c.edit_name, c.edit_model, c.edit_brand, c.edit_desc, c.edit_location, c.edit_owner, c.edit_category, key], 
-            (erro, results, fields) => {
+        CONN.query('UPDATE machines SET name=?, model=?, brand=?, description_text=?, location=?, owner=?, category=? WHERE serial_number=?', [c.edit_name, c.edit_model, c.edit_brand, c.edit_desc, c.edit_location, c.edit_owner, c.edit_category, key], 
+            (error, results, fields) => {
                 if(error) {
                     console.log("Error while trying to update ("+ key +") machine info, reason: "+error.sqlMessage);
                     res.send(error);
