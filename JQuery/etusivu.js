@@ -50,4 +50,6 @@ $(() => {
     ).fail( (jqXHR, status, error) => {
         console.log("Status="+status+", error="+error);
     });
+
+    $("#welcomeUser").append("<h1>Tervetuloa, " + sessionStorage['login_name'] + "!</h1>");
 });

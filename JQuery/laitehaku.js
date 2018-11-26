@@ -8,8 +8,8 @@ $(() => {
             data.forEach( (laite) => {
                 var nappi = "";
                 if ( sessionStorage["login_role"] == "admin") {
-                    nappi = "<input type='submit' class='muokkausnappi' value='Muuta'>" +
-                    "<button type='submit' class='poistonappi' data-deleteid="+ laite.serial_number +">Poista</button>"
+                    nappi = "<button type='submit' class='muokkausnappi'>Muokkaa</button>" +
+                    "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
 
                 $("#machinesTbody").append(
@@ -26,7 +26,12 @@ $(() => {
                     "</tr>"
                 );
 
-                $(".poistonappi").click(() => {
+                $(".muokkausnappi").click(() => {
+                    $("#editMachine_dialog").dialog("open");
+                });
+
+                $(".poistonappi").click( function()  {
+                    sessionStorage["data-deleteid"]=$(this).attr("data-deleteid");
                     $("#deleteMachine_dialog").dialog("open");
                 });
             });
@@ -42,13 +47,16 @@ $(() => {
             {
                 text: "Kyllä",
                 click: function()  {
-                    var key= $(this).attr("data-deleteid");
+                    var key = sessionStorage["data-deleteid"];
                     $.ajax(
                         {
                             url: "http:localhost:3001/machines/"+key,
                             method: 'delete'
                         }).done( (data, status, jqXHR) => {
                             window.location.href='laitteet.html';
+                            //$("#deleteMachine_dialog").dialog("close");
+                            //$("#searchForm").submit();
+                            //$("#machinesTbody").clear();
                         }).fail( (jqXHR, status, errorThrown) => {
                             console.log("Call failed: "+errorThrown);
                         });
@@ -62,6 +70,25 @@ $(() => {
             }
         ]
     });
+
+    $("#editMachine_dialog").dialog({
+        autoOpen: false,
+        buttons: [
+            {
+                text: "Tallenna",
+                click: () => {
+
+                }
+            },
+            {
+                text: "Peruuta",
+                click: () => {
+                    $("#editMachine_dialog").dialog("close");
+                }
+            }
+        ]
+        
+    })
 });
 
 // Tämän avulla sivu ei päivity kun painetaan nappia formissa
