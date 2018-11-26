@@ -8,7 +8,7 @@ $(() => {
             data.forEach( (laite) => {
                 var nappi = "";
                 if ( sessionStorage["login_role"] == "admin") {
-                    nappi = "<button type='submit' class='muokkausnappi'>Muokkaa</button>" +
+                    nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
 
@@ -26,7 +26,19 @@ $(() => {
                     "</tr>"
                 );
 
-                $(".muokkausnappi").click(() => {
+                $(".muokkausnappi").click( function()  {
+                    sessionStorage["data-editid"] = $(this).attr("data-editid");
+                    $.get("http://localhost:3001/machines/" + $(this).attr("data-editid"))
+                    .done( (data, status, jqXHR ) => {
+                        $("#edit_name").val(data[0].name);
+                        $("#edit_model").val(data[0].model);
+                        $("#edit_brand").val(data[0].brand);
+                        $("#edit_desc").val(data[0].description_text);
+                        $("#edit_location").val(data[0].location);
+                        $("#edit_owner").val(data[0].owner);
+                        $("#edit_category").val(data[0].category);
+
+                    });
                     $("#editMachine_dialog").dialog("open");
                 });
 
@@ -77,7 +89,17 @@ $(() => {
             {
                 text: "Tallenna",
                 click: () => {
-
+                    $.ajax({
+                        url: "http://localhost:3001/machines/" + sessionStorage['data-editid'],
+                        method: 'put',
+                        data: $("#editMachine_form").serialize()
+                    }
+                    ).done( (data, status, jqXHR) => {
+                        if(jqXHR.status == 204) {
+                            alert("Tiedot päivitetty onnistuneesti!");    
+                            window.location.href = "etusivu.html";
+                        } else alert("Jotain meni pieleen :(");
+                    }).fail();
                 }
             },
             {
