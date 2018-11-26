@@ -1,7 +1,12 @@
 $(() => {
     if ( sessionStorage["login_role"] == "admin") {
-        $("#machineTnappidiv").append("<button type='submit' class='lisaysnappi' >Lisää laite</button>");
+        $("#machineTnappidiv").append("<button type='submit' id='lisaysnappi'>Lisää laite</button>");
     }
+
+    $("#lisaysnappi").click(() => {
+        $("#addMachine_dialog").dialog("open");
+    });
+
     $("#search_button").click(() => {
         var hakuehdot = $("#searchForm").serialize();
         $.post("http://localhost:3001/machines",
@@ -114,6 +119,32 @@ $(() => {
         ]
         
     })
+
+    $("#addMachine_dialog").dialog({
+        autoOpen: false,
+        buttons: [
+            {
+                text: "Tallenna",
+                click: function() {
+                    var lisays = $("#addMachine_form").serialize()
+                    $.post("http://localhost:3001/machines", lisays)
+                    .done((data, status, jqXHR) => {
+                        alert("Laite lisätty onnistuneesti!");
+                        window.location.href = "laitteet.html";
+                    })
+                    .fail(
+                        alert("Jotain meni pieleen :(")
+                    );
+                }
+            },
+            {
+                text: "Peruuta",
+                click: () => {
+                    $("#addMachine_dialog").dialog("close");
+                }
+            }
+        ]
+    });
 });
 
 // Tämän avulla sivu ei päivity kun painetaan nappia formissa
