@@ -22,7 +22,7 @@ $(() => {
 
                 $("#machinesTbody").append(
                     "<tr>" + 
-                    "<td>" + laite.name + "</td>" + 
+                    "<td>" + laite.nimi + "</td>" + 
                     "<td>" + laite.model + "</td>" + 
                     "<td>" + laite.brand + "</td>" +
                     "<td>" + laite.description_text + "</td>" +

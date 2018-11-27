@@ -28,7 +28,6 @@ app.route("/users/:tunnus")
     .put(controller.updateUser);
 
 app.route("/machines")
-    .get(controller.machinesSearch)
     .post(controller.machinesSearch);
 
 app.route("/machines/add")

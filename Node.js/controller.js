@@ -42,9 +42,9 @@ module.exports =
     
     machinesSearch: (req, res) => {
         let v = req.body;
-        console.log("Name::: "+JSON.stringify(req.body));
+        //console.log("Name::: "+JSON.stringify(req.body));
         
-        CONN.query("SELECT * FROM machines WHERE name LIKE '%"+ v.name +"%' AND model LIKE '%"+ v.model +"%' AND brand LIKE '%"+ v.brand +"%' AND description_text LIKE '%"+ v.description +"%' AND location LIKE '%"+ v.location +"%' AND owner LIKE '%"+ v.owner +"%' AND category LIKE '%"+ v.category +"%' AND serial_number LIKE '%"+ v.serial +"%'", 
+        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.serial_number FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN owners o ON m.owner = o.id WHERE m.name LIKE '%"+ v.name +"%' AND m.model LIKE '%"+ v.model +"%' AND m.brand LIKE '%"+ v.brand +"%' AND m.description_text LIKE '%"+ v.description +"%' AND m.location LIKE '%"+ v.location +"%' AND o.name LIKE '%"+ v.owner +"%' AND c.category LIKE '%"+ v.category +"%' AND m.serial_number LIKE '%"+ v.serial +"%'", 
             (error, result, fields) => {
                 if(error) {
                     console.log("Error while fetching machines from machines table, reason: "+error.sqlMessage);
