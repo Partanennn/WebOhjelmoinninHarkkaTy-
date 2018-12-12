@@ -28,8 +28,8 @@ app.route("/users/:tunnus")
     .put(controller.updateUser);
 
 app.route("/varaukset/add")
-    .post();
-    
+    .post(controller.addRent);
+
 app.route("/owners")
     .get(controller.fetchOwners);
 

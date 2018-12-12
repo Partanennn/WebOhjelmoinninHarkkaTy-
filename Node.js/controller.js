@@ -101,7 +101,7 @@ module.exports =
             }
         );
     },
-    
+
     updateMachine: (req, res) => {
         let c = req.body;
         let key = req.params.id;
@@ -130,6 +130,22 @@ module.exports =
                     res.json(err);
                 } else {
                     console.log("New user added to table users: "+JSON.stringify(results));
+                    res.statusCode = 201;
+                }
+            }
+        );
+    },
+
+    addRent: (req, res) => {
+        let v = req.body;
+
+        CONN.query("INSERT INTO lainat (user_id, machine_id, start_day, end_day) VALUES (?, ?, ?, ?)", [], 
+            (err, results, fields) => {
+                if(err) {
+                    console.log("Error while trying to add new rent, reason: "+err);
+                    res.json(err);
+                } else {
+                    console.log("New rent added to lainat-table");
                     res.statusCode = 201;
                 }
             }
