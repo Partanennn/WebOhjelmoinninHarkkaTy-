@@ -1,13 +1,10 @@
-li {
-    list-style: none;
-    color: yellow;
+#reg_div {
+    display: none;
 }
+
 .container-fluid {
 
     display: flex;
     justify-content: center;
     align-items: center;
-}
-#machineTDiv {
-    overflow-x: scroll;
 }

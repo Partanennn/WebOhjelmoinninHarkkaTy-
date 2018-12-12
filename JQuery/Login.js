@@ -28,6 +28,7 @@ $(() => {
                         sessionStorage['logged'] = true;        
                         sessionStorage['login_name'] = data[0].name;
                         sessionStorage['login_username'] = data[0].username;
+                        sessionStorage['login_role'] = data[0].role;
                         window.location.href = 'etusivu.html';
                     }
                 })

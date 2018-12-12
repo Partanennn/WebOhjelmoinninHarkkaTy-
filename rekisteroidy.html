@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Harkkatyö</title>
     <link rel="stylesheet" href="etusivu_style.css">
+    <link rel="stylesheet" href="kirjautumissivu_style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -14,7 +15,9 @@
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
     <!--Sisäänkirjautumis scripti-->
+    <script src="JQuery/Register.js"></script>
     <script src="JQuery/Login.js"></script>
+    <script src="JQuery/Reg_form_popup.js"></script>
     <style>
         .navbar-collapse {
             justify-content: flex-end;
@@ -43,16 +46,47 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="form-row">
+        <div class="row">
+            <div id="login_div" class="col">
             <form id="login_form" action="/MUUTA TÄÄ" class="form">
+                <h1>Kirjaudu</h1>
                 <label for="name" class="mr-sm-2">Tunnus:</label>
                 <input id="user_text" type="name" class="form-control mb-2 mr-sm-2">
                 <label for="password" class="mr-sm-2">Salasana:</label>
                 <input id="password_text" type="password" class="form-control mb-2 mr-sm-2">
             </form>
+            <button id="login_button" class="btn btn-primary">Kirjaudu</button>
+            <br><br><a id="createAccountLink" href="javascript:undefined">Luo tunnus</a>
+            </div>
+            <div id="reg_div" class="col">
+                <h1>Rekisteröidy</h1>
+                    <form id="registration_form" action="/MUUTA TÄÄ" class="form">
+                        <label for="account_name" class="mr-sm-2">Tunnus:</label>
+                        <input name="account_name" id="account_name" type="name" class="form-control mb-2 mr-sm-2">
+                        <label for="user_name" class="mr-sm-2">Nimi:</label>
+                        <input name="user_name" id="user_name" type="name" class="form-control mb-2 mr-sm-2">
+                        <label for="reg_pwd" class="mr-sm-2">Salasana:</label>
+                        <input name="reg_pwd" id="reg_pwd" type="password" class="form-control mb-2 mr-sm-2">
+                        <label for="reg_pwd2" class="mr-sm-2">Salasana uudestaan:</label>
+                        <input name="reg_pwd2" id="reg_pwd2" type="password" class="form-control mb-2 mr-sm-2">
+                        <label for="user_address" class="mr-sm-2">Osoite:</label>
+                        <input name="user_address" id="user_address" type="address" class="form-control mb-2 mr-sm-2">
+                        <label for="user_city" class="mr-sm-2">Kaupunki:</label>
+                        <input name="user_city" id="user_city" type="city" class="form-control mb-2 mr-sm-2">
+                        <label for="user_email" class="mr-sm-2">Sähköposti:</label>
+                        <input name="user_email" id="user_email" type="email" class="form-control mb-2 mr-sm-2">
+                        
+                    </form>
+                    <button id="reg_button" class="btn btn-primary">Rekisteröidy</button>
+                    <br><br><a id="alreadyAccountLink" href="javascript:undefined">Minulla on jo tunnus</a>
+                </div>
+        
+
+         
         </div>
-        <button id="login_button" class="btn btn-primary">Kirjaudu</button>
     </div>
+
+
 
 </body>
 </html>

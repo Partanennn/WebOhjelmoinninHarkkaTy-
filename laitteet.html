@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Harkkatyö</title>
+    <link rel="stylesheet" href="etusivu_style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <!--JQuery scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <script src="JQuery/Logout.js"></script>
+    <script src="JQuery/Logged.js"></script>
+    <script src="JQuery/laitehaku.js"></script>
+
+    <style>
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg  navbar-light" style="background-color:darkslategray">
+        <a class="navbar-brand" href=""> <img src="" /> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar mr-4">
+                <li class="nav-item">
+                        <a class="nav-link" href="etusivu.html">Etusivu<span class="sr-only">(current)</span></a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="laitteet.html">Laitteet<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Lainat ja varaukset</a>
+                </li>
+                <li class="nav-item">
+                    <a id="logout" class="nav-link" href="javascript:undefined">Kirjaudu ulos</a> 
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="logout_dialog">
+        <p>Haluatko varmasti kirjautua ulos?</p>
+    </div>
+    <div id="deleteMachine_dialog">
+        <p>Haluatko varmasti poistaa laitteen?</p>
+    </div>
+    <div id="editMachine_dialog">
+        <p>Muokkaa laitteen tietoja:</p>
+        <form id="editMachine_form">
+            <input type="text" id="edit_name" name="edit_name" placeholder="Nimi" class="form-control mb-2 mr-sm-2">
+            <input type="text" id="edit_model" name="edit_model" placeholder="Malli" class="form-control mb-2 mr-sm-2">
+            <input type="text" id="edit_brand" name="edit_brand" placeholder="Merkki" class="form-control mb-2 mr-sm-2">
+            <input type="text" id="edit_desc" name="edit_desc" placeholder="Kuvaus" class="form-control mb-2 mr-sm-2">
+            <input type="text" id="edit_location" name="edit_location" placeholder="Sijainti" class="form-control mb-2 mr-sm-2">
+            <select type="text" id="edit_owner" name="edit_owner" placeholder="Omistaja" class="form-control mb-2 mr-sm-2"></select>
+            <select type="text" id="edit_category" name="edit_category" placeholder="Kategoria" class="form-control mb-2 mr-sm-2"></select>
+            <input type="text" id="edit_serial" name="edit_serial" placeholder="Sarjanumero" hidden class="form-control mb-2 mr-sm-2">
+        </form>
+    </div>
+    <div id="addMachine_dialog">
+        <p>Lisää uusi laite:</p>
+        <form id="addMachine_form">
+                <input type="text" id="add_name" name="add_name" placeholder="Nimi" class="form-control mb-2 mr-sm-2">
+                <input type="text" id="add_model" name="add_model" placeholder="Malli" class="form-control mb-2 mr-sm-2">
+                <input type="text" id="add_brand" name="add_brand" placeholder="Merkki" class="form-control mb-2 mr-sm-2">
+                <input type="text" id="add_desc" name="add_desc" placeholder="Kuvaus" class="form-control mb-2 mr-sm-2">
+                <input type="text" id="add_location" name="add_location" placeholder="Sijainti" class="form-control mb-2 mr-sm-2">
+                <select type="text" id="add_owner" name="add_owner" placeholder="Omistaja" class="form-control mb-2 mr-sm-2"></select>
+                <select type="text" id="add_category" name="add_category" placeholder="Kategoria" class="form-control mb-2 mr-sm-2"></select>
+                <input type="text" id="add_serial" name="add_serial" placeholder="Sarjanumero" hidden class="form-control mb-2 mr-sm-2">
+        </form>
+    </div>
+    <div class="container-fluid">
+        <form id="searchForm">
+                <legend>Hae laitteita</legend>
+            <div class="float-sm-left">
+                <label for="name_search">Nimi:</label>
+                <input type="text" id="name_search" name="name" class="form-control mb-2 mr-sm-2">
+                <label for="model_search">Malli:</label>
+                <input type="text" id="model_search" name="model" class="form-control mb-2 mr-sm-2">
+                <label for="brand_search">Merkki:</label>
+                <input type="text" id="brand_search" name="brand" class="form-control mb-2 mr-sm-2">
+                <label for="desc_search">Kuvaus:</label>
+                <input type="text" id="desc_search" name="description" class="form-control mb-2 mr-sm-2">
+            </div>
+            <div class="float-sm-right">
+                <label for="location_search">Sijainti:</label>
+                <input type="text" id="location_search" name="location" class="form-control mb-2 mr-sm-2">
+                <label for="owner_search">Omistaja:</label>
+                <select type="text" id="owner_search" name="owner" class="form-control mb-2 mr-sm-2"></select>
+                <label for="category_search">Kategoria:</label>
+                <select type="text" id="category_search" name="category" class="form-control mb-2 mr-sm-2"></select>
+                <label for="serial_search">Sarjanumero:</label>
+                <input type="text" id="serial_search" name="serial" class="form-control mb-2 mr-sm-2">
+                <div id="machineTnappidiv"><input type="submit" id="search_button" value="Hae"></div>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid">
+        <div  id="machineTDiv">
+        <table class="table-striped" id="machinesTable">
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Malli</th>
+                    <th>Merkki</th>
+                    <th>Kuvaus</th>
+                    <th>Sijainti</th>
+                    <th>Omistaja</th>
+                    <th>Kategoria</th>
+                    <th>Sarjanumero</th>
+                </tr>
+            </thead>
+            <tbody id="machinesTbody">
+            </tbody>
+        </table>
+    </div>
+    </div>
+</body>
+</html>

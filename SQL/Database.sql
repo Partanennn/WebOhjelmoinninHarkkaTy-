@@ -1,6 +1,7 @@
 CREATE DATABASE kanta;
 USE kanta;
 
+-- Käyttäjien tietokanta
 CREATE TABLE kanta.users
 (
     username varChar(20) NOT NULL PRIMARY KEY,
@@ -14,6 +15,23 @@ CREATE TABLE kanta.users
 ENGINE = InnoDB;
 
 
+-- Omistajien tietokanta
+CREATE TABLE kanta.owners
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varChar(40) NOT NULL
+)
+ENGINE = InnoDB;
+
+
+-- Kategorioiden tietokanta
+CREATE TABLE kanta.categories
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    category varChar(20) NOT NULL
+)
+ENGINE = InnoDB;
+
 -- Laitteiden tietokanta
 CREATE TABLE kanta.machines
 (
@@ -24,10 +42,16 @@ CREATE TABLE kanta.machines
     description_text varChar(200) DEFAULT "Tyhja",
     location varChar(80) NOT NULL,
     owner int NOT NULL,
-    category varChar(20) NOT NULL
+    category int NOT NULL,
+    CONSTRAINT machines_owner_fk FOREIGN KEY (owner) REFERENCES owners(id),
+    CONSTRAINT machines_category_fk FOREIGN KEY (category) REFERENCES categories(id)
 )
 ENGINE = InnoDB;
 
-INSERT INTO users(name, streetAddress, city, email, username, pass, role) VALUES("Testi Jäbä", "Microkatu 1", "Kuopio", "testi@email.fi", "testi", "testi", "admin");
-INSERT INTO users(name, streetAddress, city, email, username, pass) VALUES("Erkki Pesonen", "Microkatu 5", "Kuopio", "pesoserkki@uef.fi", "erkki", "erkki");
-INSERT INTO users(name, streetAddress, city, email, username, pass) VALUES("Paavo Pakoma", "Microkatu 66", "Kuopio", "puavo@ueffi.fi", "paavo", "pakoma");
+
+-- Lainojen tietokanta
+CREATE TABLE kanta.lainat
+(
+    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
+)
+ENGINE = InnoDB;
