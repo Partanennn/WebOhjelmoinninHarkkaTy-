@@ -3,6 +3,10 @@ $(() => {
         $("#machineTnappidiv").append("<button type='submit' id='lisaysnappi'>Lisää laite</button>");
     }
 
+    // Lisää hakuformiin omistaja-kohtaan tyhjän optionin
+    $("#owner_search").append("<option></option>");
+    
+    // Lisää omistajat
     $.get(
         "http://localhost:3001/owners"
     ).done( (data, status, jqXHR) => {
@@ -16,9 +20,18 @@ $(() => {
                 "<option value=" + value.id + ">" + value.name +
                 "</option>"
             );
+
+            $("#owner_search").append(
+                "<option>" + value.name +
+                "</option>"
+            )
         })
     });
 
+    // Lisää hakuformiin kategoria-kohtaan tyhjän optionin
+    $("#category_search").append("<option></option>");
+    
+    // Lisää kategoriat
     $.get(
         "http://localhost:3001/categories"
     ).done( (data, status, jqXHR) => {
@@ -32,8 +45,15 @@ $(() => {
                 "<option value=" + value.id + ">" + value.category +
                 "</option>"
             );
+
+            $("#category_search").append(
+                "<option>" + value.category +
+                "</option>"
+            );
         });
     })
+
+
 
     $("#lisaysnappi").click(() => {
         $("#addMachine_dialog").dialog("open");
