@@ -10,6 +10,10 @@
     INSERT INTO categories(category) VALUES("Tabletti");
     INSERT INTO categories(category) VALUES("Tietokone");
 
+    INSERT INTO status(status) VALUES("LAINATTU");
+    INSERT INTO status(status) VALUES("HYLLYSSÄ");
+    INSERT INTO status(status) VALUES("VARATTU");
+
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "B2002", 1, 4);
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "B2002", 1, 4);
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "e26-27", 2, 4);
