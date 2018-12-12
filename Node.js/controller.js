@@ -138,8 +138,8 @@ module.exports =
 
     addRent: (req, res) => {
         let v = req.body;
-
-        CONN.query("INSERT INTO lainat (user_id, machine_id, start_day, end_day) VALUES (?, ?, ?, ?)", [], 
+        console.log(JSON.stringify(v));
+        CONN.query("INSERT INTO lainat (user_id, machine_id, start_day, end_day) VALUES (?, ?, ?, ?)", [v.rent_user_name, v.rent_machine_id, v.rent_date_start, v.rent_date_end], 
             (err, results, fields) => {
                 if(err) {
                     console.log("Error while trying to add new rent, reason: "+err);

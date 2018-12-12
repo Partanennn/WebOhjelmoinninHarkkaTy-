@@ -72,7 +72,7 @@ $(() => {
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
 
-                lainausnappi = "<button type='submit' class='lainausnappi'>Lainaa</button>"
+                lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Lainaa</button>"
 
                 $("#machinesTbody").append(
                     "<tr>" + 
@@ -112,6 +112,8 @@ $(() => {
 
                 $(".lainausnappi").click( function() {
                     $("#rentMachine_dialog").dialog("open");
+                    $("#rent_user_name").val(sessionStorage['login_username']);
+                    $("#rent_machine_id").val($(this).attr("data-machineid"));
                 });
             });
         }).fail( (jqXHR, status, error) => {
