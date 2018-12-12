@@ -61,6 +61,12 @@ ENGINE = InnoDB;
 -- Lainojen tietokanta
 CREATE TABLE kanta.lainat
 (
-    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
+    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id varChar(20) NOT NULL,
+    machine_id int NOT NULL,
+    start_day DATE NOT NULL,
+    end_day DATE NOT NULL,
+    CONSTRAINT lainat_machineid_fk FOREIGN KEY (machine_id) REFERENCES machines(serial_number),
+    CONSTRAINT lainat_userid_fk FOREIGN KEY (user_id) REFERENCES users(username)
 )
 ENGINE = InnoDB;
