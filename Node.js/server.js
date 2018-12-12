@@ -27,6 +27,9 @@ app.route("/users/:tunnus")
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
 
+app.route("/varaukset/add")
+    .post();
+    
 app.route("/owners")
     .get(controller.fetchOwners);
 

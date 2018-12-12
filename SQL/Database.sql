@@ -32,6 +32,13 @@ CREATE TABLE kanta.categories
 )
 ENGINE = InnoDB;
 
+CREATE TABLE kanta.status
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    status varChar(20) NOT NULL
+)
+ENGINE = InnoDB;
+
 -- Laitteiden tietokanta
 CREATE TABLE kanta.machines
 (
@@ -43,6 +50,8 @@ CREATE TABLE kanta.machines
     location varChar(80) NOT NULL,
     owner int NOT NULL,
     category int NOT NULL,
+    status int DEFAULT 2,
+    CONSTRAINT machines_status_fk FOREIGN KEY (status) REFERENCES status(id),
     CONSTRAINT machines_owner_fk FOREIGN KEY (owner) REFERENCES owners(id),
     CONSTRAINT machines_category_fk FOREIGN KEY (category) REFERENCES categories(id)
 )
@@ -52,6 +61,12 @@ ENGINE = InnoDB;
 -- Lainojen tietokanta
 CREATE TABLE kanta.lainat
 (
-    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
+    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id varChar(20) NOT NULL,
+    machine_id int NOT NULL,
+    start_day DATE NOT NULL,
+    end_day DATE NOT NULL,
+    CONSTRAINT lainat_machineid_fk FOREIGN KEY (machine_id) REFERENCES machines(serial_number),
+    CONSTRAINT lainat_userid_fk FOREIGN KEY (user_id) REFERENCES users(username)
 )
 ENGINE = InnoDB;
