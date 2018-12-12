@@ -27,6 +27,12 @@ app.route("/users/:tunnus")
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
 
+app.route("/owners")
+    .get(controller.fetchOwners);
+
+app.route("/categories")
+    .get(controller.fetchCategories);
+
 app.route("/machines")
     .post(controller.machinesSearch);
 

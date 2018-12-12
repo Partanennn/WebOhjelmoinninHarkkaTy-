@@ -40,6 +40,51 @@ module.exports =
 
     },
     
+    fetchOneMachine: (req, res) => {
+        let c = req.params.id;
+        
+        CONN.query('SELECT * FROM machines WHERE serial_number=?', [c], 
+        (error, results, fields) => {
+            if(error) {
+                console.log("Error while fethching one machine info from machines-table, reason: "+error);
+                res.json({"status": 500, "error": error, "response": null});                    
+            } else {
+                console.log("Succesfully fetched one machine from machines table");
+                res.status(200).json(results);
+            }
+        })
+    },
+    
+    fetchOwners: (req, res) => {
+        
+        CONN.query('SELECT * FROM owners', 
+            (err, results, fields) => {
+                if(err) {
+                    console.log("Error while trying to fetch owners, reason: "+err.sqlMessage);
+                    res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage});
+                } else {
+                    console.log("All owners fetched succesfully!");
+                    res.status(200).json(results);
+                }
+            }
+        );
+    },
+
+    fetchCategories: (req, res) => {
+
+        CONN.query('SELECT * FROM categories', 
+            (err, results, fields) => {
+                if(err) {
+                    console.log("Error while trying to fetch all categories, reason: "+err.sqlMessage);
+                    res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage});
+                } else {
+                    console.log("All categories fetched succesfully from categories-table");
+                    res.status(200).json(results);
+                }
+            }
+        );
+    },
+
     machinesSearch: (req, res) => {
         let v = req.body;
         //console.log("Name::: "+JSON.stringify(req.body));
@@ -50,28 +95,13 @@ module.exports =
                     console.log("Error while fetching machines from machines table, reason: "+error.sqlMessage);
                     res.status(500).json({'status': 'not ok', 'status_text': error.sqlMessage});
                 } else {
-                    console.log("Succesfully fetched all machines from machines table");
+                    console.log("Succesfully fetched machines from machines table");
                     res.status(200).json(result);
                 }
             }
         );
     },
-
-    fetchOneMachine: (req, res) => {
-        let c = req.params.id;
-
-        CONN.query('SELECT * FROM machines WHERE serial_number=?', [c], 
-            (error, results, fields) => {
-                if(error) {
-                    console.log("Error while fethching one machine info from machines-table, reason: "+error);
-                    res.json({"status": 500, "error": error, "response": null});                    
-                } else {
-                    console.log("Succesfully fetched all machines from machines table");
-                    res.status(200).json(results);
-                }
-            })
-    },
-
+    
     updateMachine: (req, res) => {
         let c = req.body;
         let key = req.params.id;

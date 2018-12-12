@@ -3,6 +3,38 @@ $(() => {
         $("#machineTnappidiv").append("<button type='submit' id='lisaysnappi'>Lisää laite</button>");
     }
 
+    $.get(
+        "http://localhost:3001/owners"
+    ).done( (data, status, jqXHR) => {
+        data.forEach( (value, index) => {
+            $("#edit_owner").append(
+                "<option value=" + value.id + ">" + value.name +
+                "</option>"
+            );
+
+            $("#add_owner").append(
+                "<option value=" + value.id + ">" + value.name +
+                "</option>"
+            );
+        })
+    });
+
+    $.get(
+        "http://localhost:3001/categories"
+    ).done( (data, status, jqXHR) => {
+        data.forEach( (value, index) => {
+            $("#edit_category").append(
+                "<option value=" + value.id + ">" + value.category +
+                "</option>"
+            );
+
+            $("#add_category").append(
+                "<option value=" + value.id + ">" + value.category +
+                "</option>"
+            );
+        });
+    })
+
     $("#lisaysnappi").click(() => {
         $("#addMachine_dialog").dialog("open");
     });
@@ -126,16 +158,14 @@ $(() => {
             {
                 text: "Tallenna",
                 click: function() {
-                    $.ajax({
-                        url: "http://localhost:3001/machines/add",
-                        method: 'post',
-                        data: $("#addMachine_form").serialize()
-                    }).done(function(data, status, jqXHR)  {
-                        if (jqXHR.status == 201) {
-                            alert("Laite lisätty onnistuneesti!");
-                            window.location.href = "laitteet.html";
-                        } else alert("Jotain meni pieleen :(")
-                    }).fail();  
+                    $.post(
+                        "http://localhost:3001/machines/add",
+                        $("#addMachine_form").serialize(),
+                    ).done( () => {
+                        alert("Laite lisätty onnistuneesti!");
+                        window.location.href = "laitteet.html";
+
+                    })
                 }
             },
             {
