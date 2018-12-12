@@ -72,6 +72,8 @@ $(() => {
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
 
+                lainausnappi = "<button type='submit' class='lainausnappi'>Lainaa</button>"
+
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.nimi + "</td>" + 
@@ -83,6 +85,7 @@ $(() => {
                     "<td>" + laite.category + "</td>" +
                     "<td>" + laite.serial_number + "</td>" +
                     "<td>" + nappi + "</td>" +
+                    "<td>" + lainausnappi + "</td>" +
                     "</tr>"
                 );
 
@@ -105,6 +108,10 @@ $(() => {
                 $(".poistonappi").click( function()  {
                     sessionStorage["data-deleteid"]=$(this).attr("data-deleteid");
                     $("#deleteMachine_dialog").dialog("open");
+                });
+
+                $(".lainausnappi").click( function() {
+                    $("#rentMachine_dialog").dialog("open");
                 });
             });
         }).fail( (jqXHR, status, error) => {
@@ -170,7 +177,7 @@ $(() => {
             }
         ]
         
-    })
+    });
 
     $("#addMachine_dialog").dialog({
         autoOpen: false,
@@ -194,6 +201,31 @@ $(() => {
                     $("#addMachine_dialog").dialog("close");
                 }
             }
+        ]
+    });
+
+    $("#rentMachine_dialog").dialog({
+        autoOpen: false,
+        buttons: [
+            {
+                text: "Tallenna",
+                click: function () {
+                    $.post(
+                        "http://localhost:3001/varaukset/add",
+                        $("#rentMachine_form").serialize(),   
+                    ).done( () => {
+                        alert("Laite varattu onnistuneesti!");
+                        window.location.href = "laitteet.html";
+                    })
+                }
+            },
+            {
+                text: "Peruuta",
+                click: () => {
+                    $("#rentMachine_dialog").dialog("close");
+                }
+            }
+
         ]
     });
 });
