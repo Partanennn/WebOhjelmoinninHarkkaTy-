@@ -121,7 +121,7 @@ $(() => {
         });
     });
 
-    
+    // Poistaa laitteen
     $("#deleteMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -152,6 +152,7 @@ $(() => {
         ]
     });
 
+    // Muokkaa laitetta ja päivittää tiedon tietokantaan jos käyttäjä painaa tallenna
     $("#editMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -181,6 +182,7 @@ $(() => {
         
     });
 
+    // Lisää laitteen tietokantaan
     $("#addMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -206,6 +208,7 @@ $(() => {
         ]
     });
 
+    // Varaa laitteen
     $("#rentMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -213,12 +216,15 @@ $(() => {
                 text: "Tallenna",
                 click: function () {
                     $.post(
-                        "http://localhost:3001/varaukset/add",
-                        $("#rentMachine_form").serialize(),   
-                    ).done( () => {
-                        alert("Laite varattu onnistuneesti!");
-                        window.location.href = "laitteet.html";
-                    })
+                        "http://localhost:3001/varaukset/add", 
+                        $("#rentMachine_form").serialize(),
+                        () => {
+                            if(jqXHR.status == 201) {
+                                alert("Laite varattu onnistuneesti!");
+                                window.location.href = "laitteet.html";
+                            }
+                        }
+                    )
                 }
             },
             {
@@ -233,6 +239,6 @@ $(() => {
 });
 
 // Tämän avulla sivu ei päivity kun painetaan nappia formissa
-$(document).on("submit", "form", function(e){
-    e.preventDefault();
-});
+// $(document).on("submit", "form", function(e){
+//     e.preventDefault();
+// });

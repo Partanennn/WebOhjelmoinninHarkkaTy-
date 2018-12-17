@@ -145,6 +145,9 @@ module.exports =
                     console.log("Error while trying to add new rent, reason: "+err);
                     res.json(err);
                 } else {
+                    console.log();
+                    console.log("SAAATABNAAAAAAAA VITTUUTUTUTUTUT "+JSON.stringify(results));
+                    console.log();
                     console.log("New rent added to lainat-table");
                     res.statusCode = 201;
                 }
