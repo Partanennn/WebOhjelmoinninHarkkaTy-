@@ -36,6 +36,9 @@ app.route("/owners")
 app.route("/categories")
     .get(controller.fetchCategories);
 
+app.route("/rent_machines")
+    .get(controller.machinesRent);
+
 app.route("/machines")
     .post(controller.machinesSearch);
 

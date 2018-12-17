@@ -74,6 +74,7 @@ $(() => {
                 }
                 if(laite.status == 2)
                     lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Varaa</button>"
+                
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.nimi + "</td>" + 

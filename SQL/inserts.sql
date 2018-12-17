@@ -14,6 +14,8 @@
     INSERT INTO status(status) VALUES("HYLLYSSÄ");
     INSERT INTO status(status) VALUES("VARATTU");
 
+
+    INSERT INTO machines(name, model, brand, description_text, location, owner, category, borrower, status) VALUES("Kauluspaita", "Havaiji", "CK", "Hieno paita", "Erkin torso", 2, 2, erkki, 3);
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "B2002", 1, 4);
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "B2002", 1, 4);
     INSERT INTO machines(name, model, brand, description_text, location, owner, category) VALUES("HP Pavilion 570-p038no", "Pavilion 570-p038no", "HP", "Kelpo tietokone", "e26-27", 2, 4);

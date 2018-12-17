@@ -85,11 +85,25 @@ module.exports =
         );
     },
 
+    machinesRent: (req, res) => {
+
+        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.borrower ,m.serial_number, s.status FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN users u ON m.borrower = u.username LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.status = 3 OR m.status = 1",
+        (error, result, fields) => {
+            if(error) {
+                console.log("Error while trying to fetch all machines, reason: "+error.sqlMessage);
+                res.status(500).json({'status': 'not ok', 'status_text': error.sqlMessage});
+            } else {
+                console.log("Machines fetched from database");
+                res.status(200).json(result);
+            }
+        });
+    },
+
     machinesSearch: (req, res) => {
         let v = req.body;
         //console.log("Name::: "+JSON.stringify(req.body));
         
-        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.serial_number, m.status FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN owners o ON m.owner = o.id WHERE m.name LIKE '%"+ v.name +"%' AND m.model LIKE '%"+ v.model +"%' AND m.brand LIKE '%"+ v.brand +"%' AND m.description_text LIKE '%"+ v.description +"%' AND m.location LIKE '%"+ v.location +"%' AND o.name LIKE '%"+ v.owner +"%' AND c.category LIKE '%"+ v.category +"%' AND m.serial_number LIKE '%"+ v.serial +"%'", 
+        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.serial_number, s.status as staatus, m.status FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.name LIKE '%"+ v.name +"%' AND m.model LIKE '%"+ v.model +"%' AND m.brand LIKE '%"+ v.brand +"%' AND m.description_text LIKE '%"+ v.description +"%' AND m.location LIKE '%"+ v.location +"%' AND o.name LIKE '%"+ v.owner +"%' AND c.category LIKE '%"+ v.category +"%' AND m.serial_number LIKE '%"+ v.serial +"%'", 
             (error, result, fields) => {
                 if(error) {
                     console.log("Error while fetching machines from machines table, reason: "+error.sqlMessage);
