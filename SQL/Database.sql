@@ -51,22 +51,12 @@ CREATE TABLE kanta.machines
     owner int NOT NULL,
     category int NOT NULL,
     status int DEFAULT 2,
+    borrower varChar(20),
+    start_day DATE,
+    end_day DATE,
+    CONSTRAINT machines_borrower_fk FOREIGN KEY (borrower) REFERENCES users(username),
     CONSTRAINT machines_status_fk FOREIGN KEY (status) REFERENCES status(id),
     CONSTRAINT machines_owner_fk FOREIGN KEY (owner) REFERENCES owners(id),
     CONSTRAINT machines_category_fk FOREIGN KEY (category) REFERENCES categories(id)
-)
-ENGINE = InnoDB;
-
-
--- Lainojen tietokanta
-CREATE TABLE kanta.lainat
-(
-    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id varChar(20) NOT NULL,
-    machine_id int NOT NULL,
-    start_day DATE NOT NULL,
-    end_day DATE NOT NULL,
-    CONSTRAINT lainat_machineid_fk FOREIGN KEY (machine_id) REFERENCES machines(serial_number),
-    CONSTRAINT lainat_userid_fk FOREIGN KEY (user_id) REFERENCES users(username)
 )
 ENGINE = InnoDB;

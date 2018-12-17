@@ -67,13 +67,13 @@ $(() => {
             $("#machinesTbody").empty();
             data.forEach( (laite) => {
                 var nappi = "";
+                var lainausnappi = "";
                 if ( sessionStorage["login_role"] == "admin") {
                     nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
-
-                lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Lainaa</button>"
-
+                if(laite.status == 2)
+                    lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Varaa</button>"
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.nimi + "</td>" + 
@@ -112,6 +112,7 @@ $(() => {
 
                 $(".lainausnappi").click( function() {
                     $("#rentMachine_dialog").dialog("open");
+                    sessionStorage['data-machineid'] = $(this).attr("data-machineid");
                     $("#rent_user_name").val(sessionStorage['login_username']);
                     $("#rent_machine_id").val($(this).attr("data-machineid"));
                 });
@@ -163,8 +164,7 @@ $(() => {
                         url: "http://localhost:3001/machines/" + sessionStorage['data-editid'],
                         method: 'put',
                         data: $("#editMachine_form").serialize()
-                    }
-                    ).done( (data, status, jqXHR) => {
+                    }).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
                             alert("Tiedot päivitetty onnistuneesti!");    
                             window.location.href = "laitteet.html";
@@ -215,16 +215,16 @@ $(() => {
             {
                 text: "Tallenna",
                 click: function () {
-                    $.post(
-                        "http://localhost:3001/varaukset/add", 
-                        $("#rentMachine_form").serialize(),
-                        () => {
-                            if(jqXHR.status == 201) {
-                                alert("Laite varattu onnistuneesti!");
-                                window.location.href = "laitteet.html";
-                            }
+                    $.ajax({
+                        url: "http://localhost:3001/varaukset/add/"+sessionStorage['data-machineid'],
+                        method: 'put',
+                        data: $("#rentMachine_form").serialize()
+                    }).done( (data, status, jqXHR) => {
+                        if(jqXHR.status == 204) {
+                            alert("Laite varattu onnistuneesti!");
+                            window.location.href = "laitteet.html";
                         }
-                    )
+                    });
                 }
             },
             {
@@ -239,6 +239,6 @@ $(() => {
 });
 
 // Tämän avulla sivu ei päivity kun painetaan nappia formissa
-// $(document).on("submit", "form", function(e){
-//     e.preventDefault();
-// });
+$(document).on("submit", "form", function(e){
+    e.preventDefault();
+});
