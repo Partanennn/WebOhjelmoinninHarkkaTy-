@@ -27,10 +27,12 @@ app.route("/users/:tunnus")
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
 
+app.route("/varaukset/edit/:id")
+    .put(controller.editRent);
 
 app.route("/varaukset/add/:juu")
     .put(controller.addRent)
-    .get(controller.editRent);
+    .get(controller.editRentget);
 
 app.route("/varaukset/cancel/:id")
     .put(controller.cancelRent);

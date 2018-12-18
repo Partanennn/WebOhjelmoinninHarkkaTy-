@@ -32,6 +32,7 @@ $(() => {
                 $.get(
                     "http://localhost:3001/varaukset/add/" + $(this).attr("data-editid")
                 ).done( (data, status, jqXHR ) => {
+                    
                     $("#editRent_start").val(dateFormatter(data[0].start_day));
                     $("#editRent_end").val(dateFormatter(data[0].end_day));
 
@@ -47,6 +48,12 @@ $(() => {
         });
     });
 
+    $(function(){
+        $('[type="date"]').prop('min', function(){
+            return new Date().toJSON().split('T')[0];
+        });
+    });
+
     $("#editRent_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -54,13 +61,13 @@ $(() => {
                 text: "Tallenna",
                 click: function () {
                     $.ajax({
-                        url: "http://localhost:3001/varaukset/add/"+sessionStorage['data-machineid'],
+                        url: "http://localhost:3001/varaukset/edit/"+sessionStorage['data-editid'],
                         method: 'put',
-                        data: $("#rentMachine_form").serialize()
+                        data: $("#editRentMachine_form").serialize()
                     }).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
                             alert("Varaus muutettu onnistuneesti!");
-                            window.location.href = "lainatjavaraukset.html";
+                            window.location.href = "lainatvaraukset.html";
                         } else alert("Jotain meni pieleen :(");
                     }).fail();
                 }

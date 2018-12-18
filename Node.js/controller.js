@@ -23,7 +23,7 @@ module.exports =
         });
     },
 
-    editRent: (req, res) => {
+    editRentget: (req, res) => {
         let key = req.params.juu;
 
         CONN.query('SELECT * FROM machines WHERE serial_number=?', [key], 
@@ -217,6 +217,23 @@ module.exports =
                 }
             }
         );
+    },
+
+    editRent: (req, res) => {
+        let v = req.body;
+        let key = req.params.id;
+        console.log(JSON.stringify(v));
+        CONN.query('UPDATE machines SET start_day=?, end_day=? WHERE serial_number=?', [v.start, v.end, key], 
+            (err, result, fields) => {
+                if(err) {
+                    console.log("Error while trying to edit rent, reason: "+err.sqlMessage);
+                    res.json(err);
+                } else {
+                    console.log("Succesfully edited rent::)");
+                    res.statusCode = 204;
+                    res.send();
+                }
+            })
     },
 
     cancelRent: (req, res) => {
