@@ -65,13 +65,14 @@ $(() => {
 
     $("#cancelRent_dialog").dialog({
         autoOpen: false,
-        button: [
+        buttons: [
             {
                 text: "Kyllä",
                 click: function() {
                     $.ajax({
                         url: "http://localhost:3001/varaukset/cancel/" + sessionStorage['data-editid'],
-                        method: 'put'
+                        method: 'put',
+                        data: $("#cancelRent_form").serialize()
                     }).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
                             alert("Varaus peruttu onnistuneesti!");
