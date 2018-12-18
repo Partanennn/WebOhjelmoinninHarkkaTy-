@@ -237,6 +237,8 @@ $(() => {
                         if(jqXHR.status == 204) {
                             alert("Laite varattu onnistuneesti!");
                             window.location.href = "laitteet.html";
+                        } else {
+                            alert("Syötä oikeat päivämäärät!");
                         }
                     });
                 }
