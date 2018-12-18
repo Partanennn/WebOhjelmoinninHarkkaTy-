@@ -54,6 +54,7 @@ CREATE TABLE kanta.machines
     borrower varChar(20),
     start_day DATE,
     end_day DATE,
+    deleted int DEFAULT 1,
     CONSTRAINT machines_borrower_fk FOREIGN KEY (borrower) REFERENCES users(username),
     CONSTRAINT machines_status_fk FOREIGN KEY (status) REFERENCES status(id),
     CONSTRAINT machines_owner_fk FOREIGN KEY (owner) REFERENCES owners(id),

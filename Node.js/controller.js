@@ -55,6 +55,8 @@ module.exports =
 
     },
     
+
+
     fetchOneMachine: (req, res) => {
         let c = req.params.id;
         
@@ -118,7 +120,7 @@ module.exports =
         let v = req.body;
         //console.log("Name::: "+JSON.stringify(req.body));
         
-        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.serial_number, s.status as staatus, m.status FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.name LIKE '%"+ v.name +"%' AND m.model LIKE '%"+ v.model +"%' AND m.brand LIKE '%"+ v.brand +"%' AND m.description_text LIKE '%"+ v.description +"%' AND m.location LIKE '%"+ v.location +"%' AND o.name LIKE '%"+ v.owner +"%' AND c.category LIKE '%"+ v.category +"%' AND m.serial_number LIKE '%"+ v.serial +"%'", 
+        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.serial_number, s.status as staatus, m.status, m.deleted FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.name LIKE '%"+ v.name +"%' AND m.model LIKE '%"+ v.model +"%' AND m.brand LIKE '%"+ v.brand +"%' AND m.description_text LIKE '%"+ v.description +"%' AND m.location LIKE '%"+ v.location +"%' AND o.name LIKE '%"+ v.owner +"%' AND c.category LIKE '%"+ v.category +"%' AND m.serial_number LIKE '%"+ v.serial +"%'", 
             (error, result, fields) => {
                 if(error) {
                     console.log("Error while fetching machines from machines table, reason: "+error.sqlMessage);
@@ -148,6 +150,22 @@ module.exports =
             })
     },
  
+    deleteMachine2: (req, res) => {
+        let key = req.params.id;
+
+        CONN.query('UPDATE machines SET deleted=2 WHERE serial_number=?', [key], 
+            (error, results, fields) => {
+                if(error) {
+                    console.log("Error while trying to delete rented machine, reason: "+error.sqlMessage);
+                    res.send(error);
+                } else {
+                    console.log("Rented machine deleted succesfully:::))");
+                    res.statusCode = 204;
+                    res.send();
+                }
+            });
+    },
+
     createUser: (req, res) => {
         console.log("Body: " + JSON.stringify(req.body));
         let v = req.body;
