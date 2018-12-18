@@ -28,11 +28,11 @@ $(() => {
             }
             $(".muokkausnappi").click( function () {
                 sessionStorage["data-editid"] = $(this).attr("data-editid");
-                $.get("http://localhost:3001/machines/add/" + $(this).attr("data-editid"))
+                $.get("http://localhost:3001/varaukset/add/" + $(this).attr("data-editid"))
                 .done( (data, status, jqXHR ) => {
                     alert(data);
-                    $("editRent_start").val(data[0].start_day);
-                    $("editRent_start").val(data[0].end_day);
+                    $("#editRent_start").val(data[0].start_day);
+                    $("#editRent_start").val(data[0].end_day);
                 });
                 $("#editRent_dialog").dialog("open");
             })
