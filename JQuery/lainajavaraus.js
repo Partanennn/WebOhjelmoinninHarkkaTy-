@@ -8,7 +8,7 @@ $(() => {
             var nappi = "";
             
             nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
-            "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
+            "<button type='submit' class='peruutusnappi' data-editid='"+ laite.serial_number +"'>Peru</button>"
             
 
             if(laite.borrower == sessionStorage['login_username'] || sessionStorage['login_role'] == "admin") {
@@ -26,6 +26,12 @@ $(() => {
                     "</tr>"
                 );
             }
+
+            $(".peruutusnappi").click( function () {
+                sessionStorage["data-editid"] = $(this).attr("data-editid");
+                $.get("http://localhost:3001/machines/" + $(this).attr("data-editid"));
+                $("#cancelRent_dialog").dialog("open");
+            })
         });
     });
 
@@ -56,6 +62,32 @@ $(() => {
 
         ]
     });
+
+    $("#cancelRent_dialog").dialog({
+        autoOpen: false,
+        button: [
+            {
+                text: "Kyllä",
+                click: function() {
+                    $.ajax({
+                        url: "http://localhost:3001/varaukset/cancel/" + sessionStorage['data-editid'],
+                        method: 'put'
+                    }).done( (data, status, jqXHR) => {
+                        if(jqXHR.status == 204) {
+                            alert("Varaus peruttu onnistuneesti!");
+                            window.location.href = "lainatvaraukset.html";
+                        } else alert("Jotain meni pieleen :(");
+                    }).fail();
+                }
+            },
+            {
+                text: "En",
+                click: () => {
+                    $("#cancelRent_dialog").dialog("close");
+                }
+            }
+        ]
+    })
 
     
 })
