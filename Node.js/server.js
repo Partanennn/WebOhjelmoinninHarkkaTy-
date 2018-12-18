@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.route("/users")
     .get(controller.fetchAll)
     .post(controller.createUser);
-    
+
 app.route("/users/:tunnus") 
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
