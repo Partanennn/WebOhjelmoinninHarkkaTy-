@@ -26,6 +26,16 @@ $(() => {
                     "</tr>"
                 );
             }
+            $(".muokkausnappi").click( function () {
+                sessionStorage["data-editid"] = $(this).attr("data-editid");
+                $.get("http://localhost:3001/machines/add/" + $(this).attr("data-editid"))
+                .done( (data, status, jqXHR ) => {
+                    alert(data);
+                    $("editRent_start").val(data[0].start_day);
+                    $("editRent_start").val(data[0].end_day);
+                });
+                $("#editRent_dialog").dialog("open");
+            })
 
             $(".peruutusnappi").click( function () {
                 sessionStorage["data-editid"] = $(this).attr("data-editid");
@@ -47,16 +57,16 @@ $(() => {
                         data: $("#rentMachine_form").serialize()
                     }).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
-                            alert("Laite varattu onnistuneesti!");
-                            window.location.href = "laitteet.html";
-                        }
-                    });
+                            alert("Varaus muutettu onnistuneesti!");
+                            window.location.href = "lainatjavaraukset.html";
+                        } else alert("Jotain meni pieleen :(");
+                    }).fail();
                 }
             },
             {
                 text: "Peruuta",
                 click: () => {
-                    $("#rentMachine_dialog").dialog("close");
+                    $("#editRent_dialog").dialog("close");
                 }
             }
 

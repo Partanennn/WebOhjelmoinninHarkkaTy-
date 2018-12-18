@@ -53,17 +53,17 @@
     <div id="editRent_dialog">
         <p>Muokkaa laitteen varausta</p>
         <form id="editRentMachine_form">
-            <label for="rent_date_start">Valitse varauksen uusi alkupäivä:</label>
-            <input type="date" id="rent_date_start" name="rent_date_start" class="form-control mb-2 mr-sm-2">
-            <label for="rent_date_end">Valitse varauksen uusi loppupäivä:</label>
-            <input type="date" id="rent_date_end" name="rent_date_end" class="form-control mb-2 mr-sm-2">
+            <label for="editRent_start">Valitse varauksen uusi alkupäivä:</label>
+            <input type="date" id="editRent_start" name="editRent_start" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control mb-2 mr-sm-2">
+            <label for="editRent_end">Valitse varauksen uusi loppupäivä:</label>
+            <input type="date" id="editRent_end" name="editRent_end" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control mb-2 mr-sm-2">
             <input type="text" id="rent_machine_id" name="rent_machine_id" hidden>
             <input type="text" id="rent_user_name" name="rent_user_name" hidden>
         </form>
     </div>
 
     <div id="cancelRent_dialog">
-        <p>Haluatko varmasti peruutta varauksen?</p>
+        <p>Haluatko varmasti peruuttaa varauksen?</p>
         <form id="cancelRent_form"></form>
     </div>
     <div class="container-fluid">
