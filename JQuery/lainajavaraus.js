@@ -22,6 +22,8 @@ $(() => {
                     "<td>" + laite.owner + "</td>" +
                     "<td>" + laite.category + "</td>" +
                     "<td>" + laite.serial_number + "</td>" +
+                    "<td>" + dateFormatter(laite.start_day) + "</td>" +
+                    "<td>" + dateFormatter(laite.end_day) + "</td>" +
                     "<td>" + nappi + "</td>" +
                     "</tr>"
                 );

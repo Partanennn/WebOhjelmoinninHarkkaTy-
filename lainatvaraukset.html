@@ -54,7 +54,7 @@
         <p>Muokkaa laitteen varausta</p>
         <form id="editRentMachine_form">
             <label for="editRent_start">Valitse varauksen uusi alkupäivä:</label>
-            <input type="date" id="editRent_start" name="start" min="2018-12-02" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control mb-2 mr-sm-2">
+            <input type="date" id="editRent_start" name="start" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control mb-2 mr-sm-2">
             <label for="editRent_end">Valitse varauksen uusi loppupäivä:</label>
             <input type="date" id="editRent_end" name="end" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control mb-2 mr-sm-2">
         </form>
@@ -77,6 +77,8 @@
                     <th>Omistaja</th>
                     <th>Kategoria</th>
                     <th>Sarjanumero</th>
+                    <th>Aloitus päivä</th>
+                    <th>Lopetus päivä</th>
                 </tr>
             </thead>
             <tbody id="rent_machinesTbody">

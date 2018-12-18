@@ -102,7 +102,7 @@ module.exports =
 
     machinesRent: (req, res) => {
 
-        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.borrower ,m.serial_number, s.status FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN users u ON m.borrower = u.username LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.status = 3 OR m.status = 1",
+        CONN.query("SELECT m.name as nimi, m.model, m.brand, m.description_text, m.location, o.name as owner, c.category, m.borrower ,m.serial_number, s.status, m.start_day, m.end_day FROM machines m LEFT JOIN categories c ON m.category = c.id LEFT JOIN users u ON m.borrower = u.username LEFT JOIN owners o ON m.owner = o.id LEFT JOIN status s ON s.id = m.status WHERE m.status = 3 OR m.status = 1",
         (error, result, fields) => {
             if(error) {
                 console.log("Error while trying to fetch all machines, reason: "+error.sqlMessage);
