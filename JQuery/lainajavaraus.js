@@ -7,10 +7,12 @@ $(() => {
         data.forEach( (laite) => {
             var nappi = "";
             
+            // Lisää muokkaus sekä peruutus napit
             nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
             "<button type='submit' class='peruutusnappi' data-editid='"+ laite.serial_number +"'>Peru</button>"
             
 
+            // Päivittää taulun
             if(laite.borrower == sessionStorage['login_username'] || sessionStorage['login_role'] == "admin") {
                 $("#rent_machinesTbody").append(
                     "<tr>" + 
@@ -31,6 +33,7 @@ $(() => {
             $(".muokkausnappi").click( function () {
                 sessionStorage["data-editid"] = $(this).attr("data-editid");
 
+                // Hakee laitteen varauksen aloitus- ja lopetus päivämäärät
                 $.get(
                     "http://localhost:3001/varaukset/add/" + $(this).attr("data-editid")
                 ).done( (data, status, jqXHR ) => {
@@ -50,12 +53,8 @@ $(() => {
         });
     });
 
-    $(function(){
-        $('[type="date"]').prop('min', function(){
-            return new Date().toJSON().split('T')[0];
-        });
-    });
-
+    
+    // Varauksen muokkaaminen
     $("#editRent_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -84,6 +83,8 @@ $(() => {
         ]
     });
 
+
+    // Varauksen peruuttaminen
     $("#cancelRent_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -111,6 +112,15 @@ $(() => {
         ]
     })
 
+
+    // Asettaa kaikki inputit, joiden tyyppi on date, minimiarvoksi tämän päivän
+    $(function(){
+        $('[type="date"]').prop('min', function(){
+            return new Date().toJSON().split('T')[0];
+        });
+    });
+
+    // Muokkaa päivämäärän oikeaan muotoon
     function dateFormatter(date) {
         var d = new Date(date);
         if(date != null)
