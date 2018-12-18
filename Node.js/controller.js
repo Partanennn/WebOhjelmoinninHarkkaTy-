@@ -204,6 +204,22 @@ module.exports =
         );
     },
 
+    cancelRent: (req, res) => {
+        let key = req.params.id;
+        
+        CONN.query('UPDATE machines SET start_day=null, end_day=null, status=2, borrower=null WHERE serial_number=?', [key],
+            (err, result, fields) => {
+                if(err) {
+                    console.log("Error while trying to cancel rent, reason: "+err.sqlMessage);
+                    res.json(err);
+                } else {
+                    console.log("Rent removed succesufully:)");
+                    res.statusCode = 204;
+                    res.send();
+                }
+            })
+    },
+
     deleteMachine: (req, res) => {
         let key = req.params.id;
 

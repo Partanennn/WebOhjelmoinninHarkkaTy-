@@ -30,6 +30,9 @@ app.route("/users/:tunnus")
 app.route("/varaukset/add/:juu")
     .put(controller.addRent);
 
+app.route("/varaukset/cancel/:id")
+    .put(controller.cancelRent);
+
 app.route("/owners")
     .get(controller.fetchOwners);
 
@@ -38,6 +41,7 @@ app.route("/categories")
 
 app.route("/rent_machines")
     .get(controller.machinesRent);
+
 
 app.route("/machines")
     .post(controller.machinesSearch);
