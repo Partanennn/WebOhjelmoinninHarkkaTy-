@@ -48,6 +48,8 @@ app.route("/categories")
 app.route("/rent_machines")
     .get(controller.machinesRent);
 
+app.route("/machines/deleted/:id")
+    .put(controller.deleteMachine2);
 
 app.route("/machines")
     .post(controller.machinesSearch);

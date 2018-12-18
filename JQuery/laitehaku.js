@@ -82,7 +82,7 @@ $(() => {
                     nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
-                if(laite.status == 2)
+                if(laite.status == 2 && laite.deleted == 1)
                     lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Varaa</button>"
                 
                 $("#machinesTbody").append(
@@ -118,6 +118,7 @@ $(() => {
 
                 $(".poistonappi").click( function()  {
                     sessionStorage["data-deleteid"]=$(this).attr("data-deleteid");
+
                     $("#deleteMachine_dialog").dialog("open");
                 });
 
@@ -147,18 +148,48 @@ $(() => {
                 text: "Kyllä",
                 click: function()  {
                     var key = sessionStorage["data-deleteid"];
-                    $.ajax(
-                        {
-                            url: "http:localhost:3001/machines/"+key,
-                            method: 'delete'
-                        }).done( (data, status, jqXHR) => {
-                            window.location.href='laitteet.html';
-                            //$("#deleteMachine_dialog").dialog("close");
-                            //$("#searchForm").submit();
-                            //$("#machinesTbody").clear();
-                        }).fail( (jqXHR, status, errorThrown) => {
-                            console.log("Call failed: "+errorThrown);
-                        });
+                    var rented = 0;
+                    $.get(
+                        "http://localhost:3001/machines/"+key
+                    ).done( (data, status, jqXHR) => {
+                        if(data[0].status == 1 || data[0].status == 3) {
+                            rented = 1;
+                        } else if(data[0].status == 2 && data[0].borrower == null){
+                            rented = 2;
+                            
+                        }
+
+
+                        if(rented == 2) {
+                            $.ajax(
+                                {
+                                    url: "http:localhost:3001/machines/"+key,
+                                    method: 'delete'
+                                }
+                            ).done( (data, status, jqXHR) => {
+
+                                window.location.href='laitteet.html';
+                                
+                            }).fail( (jqXHR, status, errorThrown) => {
+                                console.log("Call failed: "+errorThrown);
+                            });
+                        } else {
+                            $.ajax(
+                                {
+                                    url: "http://localhost:3001/machines/deleted/"+key,
+                                    method: 'put'
+                                }
+                            ).done( (data, status, jqXHR) => {
+                                alert("Laitetta ei voitu poistaa, koska se on varattu!");
+                                window.location.href='laitteet.html';
+    
+                            }).fail((jqXHR, status, err) => {
+                                console.log("Call failed: "+err);
+                            })
+                        }
+                    });
+                    
+                    
                 }
             },
             {
