@@ -3,9 +3,13 @@ $(() => {
         $("#machineTnappidiv").append("<button type='submit' id='lisaysnappi'>Lisää laite</button>");
     }
 
+
+
     // Lisää hakuformiin omistaja-kohtaan tyhjän optionin
     $("#owner_search").append("<option></option>");
     
+
+
     // Lisää omistajat
     $.get(
         "http://localhost:3001/owners"
@@ -28,9 +32,13 @@ $(() => {
         })
     });
 
+
+
     // Lisää hakuformiin kategoria-kohtaan tyhjän optionin
     $("#category_search").append("<option></option>");
     
+
+
     // Lisää kategoriat
     $.get(
         "http://localhost:3001/categories"
@@ -59,6 +67,8 @@ $(() => {
         $("#addMachine_dialog").dialog("open");
     });
 
+
+
     $("#search_button").click(() => {
         var hakuehdot = $("#searchForm").serialize();
         $.post("http://localhost:3001/machines",
@@ -67,11 +77,14 @@ $(() => {
             $("#machinesTbody").empty();
             data.forEach( (laite) => {
                 var nappi = "";
+                var lainausnappi = "";
                 if ( sessionStorage["login_role"] == "admin") {
                     nappi = "<button type='submit' data-editid ='"+ laite.serial_number +"' class='muokkausnappi'>Muokkaa</button>" +
                     "<button type='submit' class='poistonappi' data-deleteid='"+ laite.serial_number +"'>Poista</button>"
                 }
-
+                if(laite.status == 2)
+                    lainausnappi = "<button type='submit' data-machineid='" + laite.serial_number + "' class='lainausnappi'>Varaa</button>"
+                
                 $("#machinesTbody").append(
                     "<tr>" + 
                     "<td>" + laite.nimi + "</td>" + 
@@ -83,6 +96,7 @@ $(() => {
                     "<td>" + laite.category + "</td>" +
                     "<td>" + laite.serial_number + "</td>" +
                     "<td>" + nappi + "</td>" +
+                    "<td>" + lainausnappi + "</td>" +
                     "</tr>"
                 );
 
@@ -106,13 +120,26 @@ $(() => {
                     sessionStorage["data-deleteid"]=$(this).attr("data-deleteid");
                     $("#deleteMachine_dialog").dialog("open");
                 });
+
+                $(".lainausnappi").click( function() {
+                    $("#rentMachine_dialog").dialog("open");
+                    sessionStorage['data-machineid'] = $(this).attr("data-machineid");
+                    $("#rent_user_name").val(sessionStorage['login_username']);
+                    $("#rent_machine_id").val($(this).attr("data-machineid"));
+                });
             });
         }).fail( (jqXHR, status, error) => {
             console.log("Status= " + status + ", " + error);
         });
     });
 
-    
+    $(function(){
+        $('[type="date"]').prop('min', function(){
+            return new Date().toJSON().split('T')[0];
+        });
+    });
+
+    // Poistaa laitteen
     $("#deleteMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -143,6 +170,7 @@ $(() => {
         ]
     });
 
+    // Muokkaa laitetta ja päivittää tiedon tietokantaan jos käyttäjä painaa tallenna
     $("#editMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -153,8 +181,7 @@ $(() => {
                         url: "http://localhost:3001/machines/" + sessionStorage['data-editid'],
                         method: 'put',
                         data: $("#editMachine_form").serialize()
-                    }
-                    ).done( (data, status, jqXHR) => {
+                    }).done( (data, status, jqXHR) => {
                         if(jqXHR.status == 204) {
                             alert("Tiedot päivitetty onnistuneesti!");    
                             window.location.href = "laitteet.html";
@@ -170,8 +197,9 @@ $(() => {
             }
         ]
         
-    })
+    });
 
+    // Lisää laitteen tietokantaan
     $("#addMachine_dialog").dialog({
         autoOpen: false,
         buttons: [
@@ -194,6 +222,39 @@ $(() => {
                     $("#addMachine_dialog").dialog("close");
                 }
             }
+        ]
+    });
+
+
+    
+    // Varaa laitteen
+    $("#rentMachine_dialog").dialog({
+        autoOpen: false,
+        buttons: [
+            {
+                text: "Tallenna",
+                click: function () {
+                    $.ajax({
+                        url: "http://localhost:3001/varaukset/add/"+sessionStorage['data-machineid'],
+                        method: 'put',
+                        data: $("#rentMachine_form").serialize()
+                    }).done( (data, status, jqXHR) => {
+                        if(jqXHR.status == 204) {
+                            alert("Laite varattu onnistuneesti!");
+                            window.location.href = "laitteet.html";
+                        } else {
+                            alert("Syötä oikeat päivämäärät!");
+                        }
+                    });
+                }
+            },
+            {
+                text: "Peruuta",
+                click: () => {
+                    $("#rentMachine_dialog").dialog("close");
+                }
+            }
+
         ]
     });
 });

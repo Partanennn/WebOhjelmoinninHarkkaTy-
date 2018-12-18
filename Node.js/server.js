@@ -22,16 +22,32 @@ app.use(bodyParser.json());
 app.route("/users")
     .get(controller.fetchAll)
     .post(controller.createUser);
-    
+
 app.route("/users/:tunnus") 
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
+
+app.route("/varaukset/edit/:id")
+    .put(controller.editRent);
+
+app.route("/varaukset/add/:juu")
+    .put(controller.addRent)
+    .get(controller.editRentget);
+
+app.route("/varaukset/cancel/:id")
+    .put(controller.cancelRent);
+
+
 
 app.route("/owners")
     .get(controller.fetchOwners);
 
 app.route("/categories")
     .get(controller.fetchCategories);
+
+app.route("/rent_machines")
+    .get(controller.machinesRent);
+
 
 app.route("/machines")
     .post(controller.machinesSearch);

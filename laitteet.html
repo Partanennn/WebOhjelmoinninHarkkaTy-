@@ -38,7 +38,7 @@
                     <a class="nav-link" href="laitteet.html">Laitteet<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Lainat ja varaukset</a>
+                    <a class="nav-link" href="lainatvaraukset.html">Lainat ja varaukset</a>
                 </li>
                 <li class="nav-item">
                     <a id="logout" class="nav-link" href="javascript:undefined">Kirjaudu ulos</a> 
@@ -76,6 +76,17 @@
                 <select type="text" id="add_owner" name="add_owner" placeholder="Omistaja" class="form-control mb-2 mr-sm-2"></select>
                 <select type="text" id="add_category" name="add_category" placeholder="Kategoria" class="form-control mb-2 mr-sm-2"></select>
                 <input type="text" id="add_serial" name="add_serial" placeholder="Sarjanumero" hidden class="form-control mb-2 mr-sm-2">
+        </form>
+    </div>
+    <div id="rentMachine_dialog">
+        <p>Varaa laite</p>
+        <form id="rentMachine_form">
+            <label for="rent_date_start">Valitse varauksen alkupäivä:</label>
+            <input type="date" id="rent_date_start" name="rent_date_start"  class="form-control mb-2 mr-sm-2">
+            <label for="rent_date_end">Valitse varauksen loppupäivä:</label>
+            <input type="date" id="rent_date_end" name="rent_date_end" class="form-control mb-2 mr-sm-2">
+            <input type="text" id="rent_machine_id" name="rent_machine_id" hidden>
+            <input type="text" id="rent_user_name" name="rent_user_name" hidden>
         </form>
     </div>
     <div class="container-fluid">

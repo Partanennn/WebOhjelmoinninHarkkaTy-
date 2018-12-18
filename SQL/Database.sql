@@ -32,6 +32,13 @@ CREATE TABLE kanta.categories
 )
 ENGINE = InnoDB;
 
+CREATE TABLE kanta.status
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    status varChar(20) NOT NULL
+)
+ENGINE = InnoDB;
+
 -- Laitteiden tietokanta
 CREATE TABLE kanta.machines
 (
@@ -43,15 +50,13 @@ CREATE TABLE kanta.machines
     location varChar(80) NOT NULL,
     owner int NOT NULL,
     category int NOT NULL,
+    status int DEFAULT 2,
+    borrower varChar(20),
+    start_day DATE,
+    end_day DATE,
+    CONSTRAINT machines_borrower_fk FOREIGN KEY (borrower) REFERENCES users(username),
+    CONSTRAINT machines_status_fk FOREIGN KEY (status) REFERENCES status(id),
     CONSTRAINT machines_owner_fk FOREIGN KEY (owner) REFERENCES owners(id),
     CONSTRAINT machines_category_fk FOREIGN KEY (category) REFERENCES categories(id)
-)
-ENGINE = InnoDB;
-
-
--- Lainojen tietokanta
-CREATE TABLE kanta.lainat
-(
-    laina_id int NOT NULL AUTO_INCREMENT PRIMARY KEY
 )
 ENGINE = InnoDB;
