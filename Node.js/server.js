@@ -27,11 +27,15 @@ app.route("/users/:tunnus")
     .get(controller.fetchOneUser)
     .put(controller.updateUser);
 
+
 app.route("/varaukset/add/:juu")
-    .put(controller.addRent);
+    .put(controller.addRent)
+    .get(controller.editRent);
 
 app.route("/varaukset/cancel/:id")
     .put(controller.cancelRent);
+
+
 
 app.route("/owners")
     .get(controller.fetchOwners);

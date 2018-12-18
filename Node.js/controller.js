@@ -23,6 +23,21 @@ module.exports =
         });
     },
 
+    editRent: (req, res) => {
+        let key = req.params.juu;
+
+        CONN.query('SELECT * FROM machines WHERE serial_number=?', [key], 
+            (err, result, fields) => {
+                if(err) {
+                    console.log("Error while trying to get machine data to edit rent, reason: "+err.sqlMessage);
+                    res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage });                 
+                } else {
+                    console.log("Succesfully fetched all data for machine:):)");
+                    res.status(200).json(result);
+                }
+        });
+    },
+
     // Hakee yhden henkilön tiedot users taulusta
     fetchOneUser: (req, res) => {
         var username = req.params.tunnus;
