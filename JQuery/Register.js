@@ -103,7 +103,6 @@ $(() => {
 
     function createUser() {
         var addons = $("#registration_form").serialize();
-        alert(addons);
         $.post(
             "http://localhost:3001/users", 
             addons
