@@ -1,4 +1,3 @@
-# Testii
+# Web ohjelmoinnin harjoitustyö
 
-Testi 2:)
-jtn
+Laiterekisteri, jolla voi lainata laitteita. Toteutus web-seovelluksena, joka tallentaa datan tietokantaan.
